@@ -2,6 +2,10 @@
 
 Isaac Liu, Mayank Sethi, Gaurav Sharan Srivastava, Ashutosh Tiwari
 
+### Proposal Google Doc
+
+(https://docs.google.com/document/d/1gqSdT-nfqlwkdRbOqXKUY_XXxJQ3LouqXd0_QTCT2Z0/edit)
+
 ### Box
 
 All data for this project is kept on Box.
