@@ -2,7 +2,9 @@
 
 Isaac Liu, Mayank Sethi, Gaurav Sharan Srivastava, Ashutosh Tiwari
 
-### [Proposal Google Doc](https://docs.google.com/document/d/1gqSdT-nfqlwkdRbOqXKUY_XXxJQ3LouqXd0_QTCT2Z0/edit)
+### Proposal Google Doc
+
+Doc [here](https://docs.google.com/document/d/1gqSdT-nfqlwkdRbOqXKUY_XXxJQ3LouqXd0_QTCT2Z0/edit).
 
 ### Box
 
