@@ -6,6 +6,10 @@ Isaac Liu, Mayank Sethi, Gaurav Sharan Srivastava, Ashutosh Tiwari
 
 Doc [here](https://docs.google.com/document/d/1gqSdT-nfqlwkdRbOqXKUY_XXxJQ3LouqXd0_QTCT2Z0/edit).
 
+### Weekly Updates Google Slides
+
+Slides [here](https://docs.google.com/presentation/d/1k3huPGVXQNyoEpoVzcwHZrJ3EdEE_T08D6G-Vn3P4EA/edit#slide=id.g2c00b2e32d3_0_247).
+
 ### Box
 
 All data for this project is kept on Box.
