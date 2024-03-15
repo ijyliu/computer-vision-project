@@ -7,10 +7,10 @@ import os
 import pandas as pd
 from scipy import ndimage
 
-# Function to resize images
-# If both dimensions larger than 260 (256 but adding some padding), downsample so the smaller dimension is 260
-# Crop the center 256x256 pixels and return image
 def resize_image(image):
+    '''
+    Function to resize images. If both dimensions larger than 260 (256 but adding some padding), downsample so the smaller dimension is 260. Apply Gaussian blurs to hand aliasing. Crop the center 256x256 pixels and return image.
+    '''
     # Load width and height
     width = image.shape[1]
     height = image.shape[0]
@@ -29,8 +29,10 @@ def resize_image(image):
     resized_image = image[int((image.shape[0] - 256) / 2):int((image.shape[0] + 256) / 2), int((image.shape[1] - 256) / 2):int((image.shape[1] + 256) / 2)]
     return resized_image
 
-# Function to process an image
 def process_image(row):
+    '''
+    Function to process an image. Takes a row from the dataframe with the source and destination file paths and resizes appropriately.
+    '''
     # Load image
     image = cv2.imread(os.path.expanduser(row['source_file_path']))
     #print('loaded ', row['source_file_path'])
