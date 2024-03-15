@@ -29,14 +29,14 @@ def resize_image(image):
     resized_image = image[int((image.shape[0] - 256) / 2):int((image.shape[0] + 256) / 2), int((image.shape[1] - 256) / 2):int((image.shape[1] + 256) / 2)]
     return resized_image
 
-def process_image(row):
+def process_image(source_file_path, destination_file_path):
     '''
-    Function to process an image. Takes a row from the dataframe with the source and destination file paths and resizes appropriately.
+    Function to process an image. Takes the source and destination file paths and resizes appropriately.
     '''
     # Load image
-    image = cv2.imread(os.path.expanduser(row['source_file_path']))
+    image = cv2.imread(os.path.expanduser(source_file_path))
     #print('loaded ', row['source_file_path'])
     # Resize image
     resized_image = resize_image(image)
     # Save image
-    cv2.imwrite(os.path.expanduser(row['destination_file_path']), resized_image)
+    cv2.imwrite(os.path.expanduser(destination_file_path), resized_image)
