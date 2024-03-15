@@ -4,7 +4,6 @@
 # Packages
 import cv2
 import os
-import pandas as pd
 from scipy import ndimage
 
 def resize_image(image):
