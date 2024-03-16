@@ -1,0 +1,15 @@
+number of images to process: 8252
+number of CPUs: 48
+files in target dir
+Traceback (most recent call last):
+  File "/accounts/grad/ijyliu/repo/computer-vision-project/Code/Data Loading and Cleaning/Parallel_Resizing.py", line 39, in <module>
+    main()
+  File "/accounts/grad/ijyliu/repo/computer-vision-project/Code/Data Loading and Cleaning/Parallel_Resizing.py", line 36, in main
+    print(len(os.listdir(os.path.expanduser(destination_path) + '/..')))
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+NotADirectoryError: [Errno 20] Not a directory: '/accounts/grad/ijyliu/Box/INFO 290T Project/Intermediate Data/Resized Images/train/SUV_train_01117_resized.jpg/..'
+Time elapsed: 0 minute(s).
+Train images:
+6192
+Test images:
+1628
