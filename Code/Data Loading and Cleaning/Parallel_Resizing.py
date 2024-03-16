@@ -2,6 +2,7 @@ import os
 from concurrent.futures import ProcessPoolExecutor
 from Image_Processing_Functions import *
 import pandas as pd
+import shutil
 
 # Flag for a test/sample run
 test_run = False
@@ -21,6 +22,13 @@ def main():
         images = images[:10]
 
     print('number of images to process:', len(images))
+
+    # Prepare directories
+    # Clear existing directory
+    shutil.rmtree(os.path.expanduser("~/Box/INFO 290T Project/Intermediate Data/Resized Images/"), ignore_errors=True)
+    # Make subdirectories
+    os.makedirs(os.path.expanduser("~/Box/INFO 290T Project/Intermediate Data/Resized Images/train"), exist_ok=True)
+    os.makedirs(os.path.expanduser("~/Box/INFO 290T Project/Intermediate Data/Resized Images/test"), exist_ok=True)
     
     # Determine the number of available CPUs
     num_cpus = os.cpu_count()

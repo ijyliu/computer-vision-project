@@ -7,33 +7,36 @@ from scipy import ndimage
 import matplotlib.pyplot as plt # using mpl image read/write to try to avoid potential cv2 issues
 import time
 
-def resize_image(image):
+def resize_image(image, blur = True, blur_sigma = 0.75, target_size = 256):
     '''
-    Function to resize images. If both dimensions larger than 260 (256 but adding some padding), downsample so the smaller dimension is 260. Apply Gaussian blurs to handle aliasing. Crop the center 256x256 pixels and return image.
+    Function to resize images. If both dimensions larger than target size + 4 (adding some padding), downsample so the smaller dimension is target size + 4. Apply Gaussian blurs to handle aliasing. Crop the center pixels to fit target size square and return image.
     '''
     # Load width and height
     width = image.shape[1]
     height = image.shape[0]
-    # Check if both dimensions are larger than 260
-    if width > 260 and height > 260:
-        # Determine scaling factor needed to make the smaller dimension 260
-        scale_factor = 260 / min(width, height)
-        # Add blur to image to handle aliasing
-        blurred_image = ndimage.gaussian_filter(image, sigma=0.75)
+    # Check if both dimensions are larger than target size + 4
+    if width > target_size + 4 and height > target_size + 4:
+        # Determine scaling factor needed to make the smaller dimension target size + 4
+        scale_factor = (target_size + 4) / min(width, height)
+        # Optionally blur to image to handle aliasing
+        if blur:
+            image = ndimage.gaussian_filter(image, sigma=blur_sigma)
         # Scale image
-        scaled_image = cv2.resize(blurred_image, dsize=None, fx=scale_factor, fy=scale_factor, interpolation=cv2.INTER_LINEAR)
-        # Crop center 256x256 pixels
-        resized_image = scaled_image[int((scaled_image.shape[0] - 256) / 2):int((scaled_image.shape[0] + 256) / 2), int((scaled_image.shape[1] - 256) / 2):int((scaled_image.shape[1] + 256) / 2)]
-    # Otherwise: still add some Gaussian blur to handle aliasing (not as optimal as the downsampling case, but still better than nothing)
+        image = cv2.resize(image, dsize=None, fx=scale_factor, fy=scale_factor, interpolation=cv2.INTER_LINEAR)
+        # Crop center pixels
+        resized_image = image[int((image.shape[0] - target_size) / 2):int((image.shape[0] + target_size) / 2), int((image.shape[1] - target_size) / 2):int((image.shape[1] + target_size) / 2)]
+    # Otherwise: can still add some Gaussian blur to handle aliasing (not as optimal as the downsampling case, but still better than nothing)
     else:
-        blurred_image = ndimage.gaussian_filter(image, sigma=0.75)
-        # Crop center 256x256 pixels
-        resized_image = blurred_image[int((blurred_image.shape[0] - 256) / 2):int((blurred_image.shape[0] + 256) / 2), int((blurred_image.shape[1] - 256) / 2):int((blurred_image.shape[1] + 256) / 2)]
+        # Optionally blur to image to handle aliasing
+        if blur:
+            image = ndimage.gaussian_filter(image, sigma=blur_sigma)
+        # Crop center pixels
+        resized_image = image[int((image.shape[0] - target_size) / 2):int((image.shape[0] + target_size) / 2), int((image.shape[1] - target_size) / 2):int((image.shape[1] + target_size) / 2)]
     # Check size of resized_image
     #print('resized image shape:', resized_image.shape())
     return resized_image
 
-def process_image(source_file_path, destination_file_path):
+def process_image(source_file_path, destination_file_path, blur = True, blur_sigma = 0.75, target_size = 256):
     '''
     Function to process an image. Takes the source and destination file paths and resizes appropriately.
     '''
@@ -44,7 +47,7 @@ def process_image(source_file_path, destination_file_path):
     if input_image is None:
         raise ValueError('Image not loaded: ' + os.path.expanduser(source_file_path))
     # Resize image
-    resized_image = resize_image(input_image)
+    resized_image = resize_image(input_image, blur, blur_sigma, target_size)
     # Check image is resized
     if resized_image is None:
         raise ValueError('Image not resized: ' + os.path.expanduser(source_file_path))
