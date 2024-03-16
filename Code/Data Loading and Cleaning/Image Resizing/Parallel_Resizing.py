@@ -9,7 +9,7 @@ test_run = False
 
 def main():
 
-    # Load "~/Box/INFO 290T Project/Intermediate Data/resized_cars_annos.xlsx"
+    # Load "resized_cars_annos.xlsx"
     # This file contains the paths to the original and resized images
     resized_cars_annos = pd.read_excel('~/Box/INFO 290T Project/Intermediate Data/resized_cars_annos.xlsx')
 
