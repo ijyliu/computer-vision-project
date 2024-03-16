@@ -10,7 +10,7 @@ import time
 
 def resize_image(image):
     '''
-    Function to resize images. If both dimensions larger than 260 (256 but adding some padding), downsample so the smaller dimension is 260. Apply Gaussian blurs to hand aliasing. Crop the center 256x256 pixels and return image.
+    Function to resize images. If both dimensions larger than 260 (256 but adding some padding), downsample so the smaller dimension is 260. Apply Gaussian blurs to handle aliasing. Crop the center 256x256 pixels and return image.
     '''
     # Load width and height
     width = image.shape[1]
@@ -20,14 +20,16 @@ def resize_image(image):
         # Determine scaling factor needed to make the smaller dimension 260
         scale_factor = 260 / min(width, height)
         # Add blur to image to handle aliasing
-        image = ndimage.gaussian_filter(image, sigma=0.75)
+        blurred_image = ndimage.gaussian_filter(image, sigma=0.75)
         # Scale image
-        image = cv2.resize(image, dsize=None, fx=scale_factor, fy=scale_factor, interpolation=cv2.INTER_LINEAR)
+        scaled_image = cv2.resize(blurred_image, dsize=None, fx=scale_factor, fy=scale_factor, interpolation=cv2.INTER_LINEAR)
+        # Crop center 256x256 pixels
+        resized_image = scaled_image[int((scaled_image.shape[0] - 256) / 2):int((scaled_image.shape[0] + 256) / 2), int((scaled_image.shape[1] - 256) / 2):int((scaled_image.shape[1] + 256) / 2)]
     # Otherwise: still add some Gaussian blur to handle aliasing (not as optimal as the downsampling case, but still better than nothing)
     else:
-        image = ndimage.gaussian_filter(image, sigma=0.75)
-    # Crop center 256x256 pixels
-    resized_image = image[int((image.shape[0] - 256) / 2):int((image.shape[0] + 256) / 2), int((image.shape[1] - 256) / 2):int((image.shape[1] + 256) / 2)]
+        blurred_image = ndimage.gaussian_filter(image, sigma=0.75)
+        # Crop center 256x256 pixels
+        resized_image = blurred_image[int((blurred_image.shape[0] - 256) / 2):int((blurred_image.shape[0] + 256) / 2), int((blurred_image.shape[1] - 256) / 2):int((blurred_image.shape[1] + 256) / 2)]
     return resized_image
 
 def process_image(source_file_path, destination_file_path):
@@ -35,12 +37,12 @@ def process_image(source_file_path, destination_file_path):
     Function to process an image. Takes the source and destination file paths and resizes appropriately.
     '''
     # Load image
-    image = plt.imread(os.path.expanduser(source_file_path))
+    input_image = plt.imread(os.path.expanduser(source_file_path))
     # Check image is loaded
-    if image is None:
+    if input_image is None:
         raise ValueError('Image not loaded: ' + os.path.expanduser(source_file_path))
     # Resize image
-    resized_image = resize_image(image)
+    resized_image = resize_image(input_image)
     # Check image is resized
     if resized_image is None:
         raise ValueError('Image not resized: ' + os.path.expanduser(source_file_path))
