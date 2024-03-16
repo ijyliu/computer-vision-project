@@ -5,7 +5,13 @@
 # Suppress output
 #SBATCH --output=/dev/null
 
+# Make directory if needed
+mkdir -p "~/Box/INFO 290T Project"
+
+# Load rclone module
+module load rclone
+
 # Push to remote/online version
-rclone copy "~/Box/INFO 290T Project" Box:"INFO 290T Project" --update
+rclone copy "~/Box/INFO 290T Project" "Box:INFO 290T Project" --update
 # Pull from remote/online version
-rclone copy Box:"INFO 290T Project" "~/Box/INFO 290T Project" --update
+rclone copy "Box:INFO 290T Project" "~/Box/INFO 290T Project" --update
