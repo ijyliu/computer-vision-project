@@ -1,7 +1,13 @@
-number of images to process: 8252
+number of blurred images to process: 8252
+number of CPUs: 48
+number of non-blurred images to process: 8252
 number of CPUs: 48
 Time elapsed: 1 minute(s).
-Train images:
+Train Blurred images:
 6596
-Test images:
+Train Non-Blurred images:
+6596
+Test Blurred images:
+1656
+Test Non-Blurred images:
 1656

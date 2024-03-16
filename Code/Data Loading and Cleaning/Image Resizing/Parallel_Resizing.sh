@@ -18,7 +18,11 @@ elapsed_minutes=$((SECONDS / 60))
 echo "Time elapsed: $elapsed_minutes minute(s)."
 
 # Count files
-echo "Train images:"
-ls -1q ~/Box/"INFO 290T Project/Intermediate Data/Resized Images"/train | wc -l
-echo "Test images:"
-ls -1q ~/Box/"INFO 290T Project/Intermediate Data/Resized Images"/test | wc -l
+echo "Train Blurred images:"
+ls -1q ~/repo/computer-vision-project/Images/train/Blurred | wc -l
+echo "Train Non-Blurred images:"
+ls -1q ~/repo/computer-vision-project/Images/train/"No Blur" | wc -l
+echo "Test Blurred images:"
+ls -1q ~/repo/computer-vision-project/Images/test/Blurred | wc -l
+echo "Test Non-Blurred images:"
+ls -1q ~/repo/computer-vision-project/Images/test/"No Blur" | wc -l

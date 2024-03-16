@@ -5,7 +5,7 @@ import pandas as pd
 #import shutil
 
 # Flag for a test/sample run
-test_run = True
+test_run = False
 
 def main():
 
