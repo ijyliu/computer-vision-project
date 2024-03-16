@@ -32,6 +32,8 @@ def main():
         # Submit the image processing function to the executor
         for source_path, destination_path in images:
             executor.submit(process_image, source_path, destination_path)
+            # print('files in target dir')
+            # print(len(os.listdir(os.path.expanduser(destination_path) + '/..')))
 
 if __name__ == "__main__":
     main()

@@ -29,6 +29,8 @@ def resize_image(image):
         blurred_image = ndimage.gaussian_filter(image, sigma=0.75)
         # Crop center 256x256 pixels
         resized_image = blurred_image[int((blurred_image.shape[0] - 256) / 2):int((blurred_image.shape[0] + 256) / 2), int((blurred_image.shape[1] - 256) / 2):int((blurred_image.shape[1] + 256) / 2)]
+    # Check size of resized_image
+    #print('resized image shape:', resized_image.shape())
     return resized_image
 
 def process_image(source_file_path, destination_file_path):
@@ -37,6 +39,7 @@ def process_image(source_file_path, destination_file_path):
     '''
     # Load image
     input_image = plt.imread(os.path.expanduser(source_file_path))
+    #print('processing ', os.path.expanduser(source_file_path))
     # Check image is loaded
     if input_image is None:
         raise ValueError('Image not loaded: ' + os.path.expanduser(source_file_path))
@@ -52,3 +55,7 @@ def process_image(source_file_path, destination_file_path):
     time.sleep(0.1)
     if not os.path.exists(os.path.expanduser(destination_file_path)):
         raise ValueError('Image not saved: ' + os.path.expanduser(destination_file_path))
+    # Print number of files in the directory
+    # print('files in target dir')
+    # print(len(os.listdir(os.path.expanduser(destination_file_path) + '/..')))
+    # print('')
