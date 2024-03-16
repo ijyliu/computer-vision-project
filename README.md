@@ -1,5 +1,7 @@
 # computer-vision-project
 
+Project Deadline: 15th April
+
 Isaac Liu, Mayank Sethi, Gaurav Sharan Srivastava, Ashutosh Tiwari
 
 ### Proposal Google Doc
