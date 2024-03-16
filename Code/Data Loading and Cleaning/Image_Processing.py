@@ -6,6 +6,7 @@ import cv2
 import os
 from scipy import ndimage
 import matplotlib.pyplot as plt # using mpl image read/write to try to avoid potential cv2 issues
+import time
 
 def resize_image(image):
     '''
@@ -35,8 +36,18 @@ def process_image(source_file_path, destination_file_path):
     '''
     # Load image
     image = plt.imread(os.path.expanduser(source_file_path))
-    #print('loaded ', row['source_file_path'])
+    # Check image is loaded
+    if image is None:
+        raise ValueError('Image not loaded: ' + os.path.expanduser(source_file_path))
     # Resize image
     resized_image = resize_image(image)
+    # Check image is resized
+    if resized_image is None:
+        raise ValueError('Image not resized: ' + os.path.expanduser(source_file_path))
     # Save image
     plt.imsave(os.path.expanduser(destination_file_path), resized_image)
+    # Check file exists
+    # Sleep for a little bit to avoid potential file system issues
+    time.sleep(0.1)
+    if not os.path.exists(os.path.expanduser(destination_file_path)):
+        raise ValueError('Image not saved: ' + os.path.expanduser(destination_file_path))
