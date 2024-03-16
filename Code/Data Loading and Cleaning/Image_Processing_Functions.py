@@ -1,5 +1,4 @@
-# Image_Processing.py
-# Functions for image processing
+# Image_Processing_Functions.py
 
 # Packages
 import cv2

@@ -7,7 +7,7 @@
 echo "Making directory"
 
 # Make directory if needed
-mkdir -p "~/Box/INFO 290T Project"
+mkdir -p ~/Box/"INFO 290T Project"
 
 echo "Beginning Push"
 
