@@ -1,0 +1,38 @@
+import os
+from concurrent.futures import ProcessPoolExecutor
+from functools import partial
+from Image_Processing import *
+import pandas as pd
+
+# Flag for a test/sample run
+test_run = True
+
+def main():
+
+    # Load "~/Box/INFO 290T Project/Intermediate Data/resized_cars_annos.xlsx"
+    # This file contains the paths to the original and resized images
+    resized_cars_annos = pd.read_excel('~/Box/INFO 290T Project/Intermediate Data/resized_cars_annos.xlsx')
+
+    # Create a list of tuples containing the source and destination paths for the images
+    # Columns orig_res_file_path and resized_file_path
+    images = list(zip(resized_cars_annos['orig_res_file_path'], resized_cars_annos['resized_file_path']))
+
+    # If this is a test run, only do the first 10 images
+    if test_run:
+        images = images[:10]
+
+    print('number of images to process:', len(images))
+    
+    # Determine the number of available CPUs
+    num_cpus = os.cpu_count()
+
+    print('number of CPUs:', num_cpus)
+
+    # Use a process pool to execute image processing in parallel
+    with ProcessPoolExecutor(max_workers=num_cpus) as executor:
+        # Using partial to prepare a function with the common argument 'destination_path' filled
+        for source_path, destination_path in images:
+            executor.submit(process_image, source_path, destination_path)
+
+if __name__ == "__main__":
+    main()
