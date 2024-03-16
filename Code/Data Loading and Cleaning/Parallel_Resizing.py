@@ -1,6 +1,5 @@
 import os
 from concurrent.futures import ProcessPoolExecutor
-from functools import partial
 from Image_Processing import *
 import pandas as pd
 
@@ -30,7 +29,7 @@ def main():
 
     # Use a process pool to execute image processing in parallel
     with ProcessPoolExecutor(max_workers=num_cpus) as executor:
-        # Using partial to prepare a function with the common argument 'destination_path' filled
+        # Submit the image processing function to the executor
         for source_path, destination_path in images:
             executor.submit(process_image, source_path, destination_path)
 
