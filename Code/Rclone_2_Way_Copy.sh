@@ -2,7 +2,7 @@
 
 #SBATCH --job-name=Rclone_2_Way_Copy
 #SBATCH --partition=lowmem
-#SBATCH --output=Rclone_2_Way_Copy.out
+#SBATCH --output=/dev/null
 
 echo "Making directory"
 
