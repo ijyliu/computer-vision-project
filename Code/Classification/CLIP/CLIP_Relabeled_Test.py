@@ -12,6 +12,16 @@ import pandas as pd
 # Flag for a test/sample run
 test_run = False
 
+# Enabling and disabling print
+import sys
+import os
+# Disable printing
+def blockPrint():
+    sys.stdout = open(os.devnull, 'w')
+# Restore printing
+def enablePrint():
+    sys.stdout = sys.__stdout__
+
 # Function to take an input filepath and return the CLIP probabilities
 def get_clip_prediction(filepath):
 
@@ -47,21 +57,30 @@ def main():
     num_cpus = os.cpu_count()
     print('number of CPUs:', num_cpus)
 
+    paths = list(relabeled_test_no_blur_old_and_new_labels['non_blurred_image_path'])
+    print(paths[:5])
+
     # Use a process pool to execute image processing in parallel
+    # Turn off printing
+    blockPrint()
+    # Set up pool
     with ProcessPoolExecutor(max_workers=num_cpus) as executor:
         # Submit the image processing function to the executor using map
-        probs = list(executor.map(get_clip_prediction, relabeled_test_no_blur_old_and_new_labels['non_blurred_image_path']))
+        probs = list(executor.map(get_clip_prediction, paths))
+    # Enable printing
+    enablePrint()
 
-    # Check first value of probs
+    # Check first, second value of probs
     print(probs[0])
+    print(probs[1])
     
     # Add probabilities to the dataframe
     relabeled_test_no_blur_old_and_new_labels['clip_probs'] = probs
     # Unnest the probabilities lists
-    relabeled_test_no_blur_old_and_new_labels['prob_SUV'] = relabeled_test_no_blur_old_and_new_labels['clip_probs'].apply(lambda x: x[0])
-    relabeled_test_no_blur_old_and_new_labels['prob_Sedan'] = relabeled_test_no_blur_old_and_new_labels['clip_probs'].apply(lambda x: x[1])
-    relabeled_test_no_blur_old_and_new_labels['prob_Pickup'] = relabeled_test_no_blur_old_and_new_labels['clip_probs'].apply(lambda x: x[2])
-    relabeled_test_no_blur_old_and_new_labels['prob_Convertible'] = relabeled_test_no_blur_old_and_new_labels['clip_probs'].apply(lambda x: x[3])
+    relabeled_test_no_blur_old_and_new_labels['prob_SUV'] = relabeled_test_no_blur_old_and_new_labels['clip_probs'].apply(lambda x: x[0][0])
+    relabeled_test_no_blur_old_and_new_labels['prob_Sedan'] = relabeled_test_no_blur_old_and_new_labels['clip_probs'].apply(lambda x: x[0][1])
+    relabeled_test_no_blur_old_and_new_labels['prob_Pickup'] = relabeled_test_no_blur_old_and_new_labels['clip_probs'].apply(lambda x: x[0][2])
+    relabeled_test_no_blur_old_and_new_labels['prob_Convertible'] = relabeled_test_no_blur_old_and_new_labels['clip_probs'].apply(lambda x: x[0][3])
 
     # Check dataframe
     print(relabeled_test_no_blur_old_and_new_labels.head())
@@ -80,7 +99,7 @@ def main():
 
     # Output predictions to Excel
     # Keep columns filename, prob_SUV, prob_Sedan, prob_Pickup, prob_Convertible, predicted_label, 'New Class'
-    relabeled_test_no_blur_old_and_new_labels[['filename', 'prob_SUV', 'prob_Sedan', 'prob_Pickup', 'prob_Convertible', 'predicted_label', 'New Class']].to_excel('../../Data/Predictions/CLIP_Relabeled_Test_No_Blur/CLIP_Relabeled_Test_No_Blur_predictions.xlsx', index=False)
+    relabeled_test_no_blur_old_and_new_labels[['filename', 'prob_SUV', 'prob_Sedan', 'prob_Pickup', 'prob_Convertible', 'predicted_label', 'New Class']].to_excel('../../../Data/Predictions/CLIP_Relabeled_Test_No_Blur/CLIP_Relabeled_Test_No_Blur_predictions.xlsx', index=False)
 
 if __name__ == "__main__":
     main()
