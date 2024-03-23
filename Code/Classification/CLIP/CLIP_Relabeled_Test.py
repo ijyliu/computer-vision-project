@@ -4,7 +4,7 @@
 
 # Packages
 from autogluon.multimodal import MultiModalPredictor
-import matplotlib.pyplot as plt
+from IPython.display import Image, display
 import os
 from concurrent.futures import ProcessPoolExecutor
 import pandas as pd
@@ -16,11 +16,11 @@ test_run = False
 def get_clip_prediction(filepath):
 
     # Load image from filepath
-    loaded_img = plt.imread(filepath)
+    loaded_img = Image(filename=filepath)
 
     # Get CLIP prediction
     predictor = MultiModalPredictor(problem_type="zero_shot_image_classification")
-    probs = predictor.predict({"image": [loaded_img]}, {"text": ['This is an SUV', 'This is a Sedan', 'This is a Pickup', 'This is a Convertible']})
+    probs = predictor.predict_proba({"image": [loaded_img]}, {"text": ['This is an SUV', 'This is a Sedan', 'This is a Pickup', 'This is a Convertible']})
 
     # Return probabilities
     return probs
