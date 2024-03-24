@@ -14,7 +14,7 @@ Slides [here](https://docs.google.com/presentation/d/1k3huPGVXQNyoEpoVzcwHZrJ3Ed
 
 ### Final Report Google Doc
 
-Doc [here](https://docs.google.com/document/d/1gqSdT-nfqlwkdRbOqXKUY_XXxJQ3LouqXd0_QTCT2Z0/edit](https://docs.google.com/document/d/1SyQlI5hRL8LXtmMQ49xAppqQbRFW-4HMETR-cenwzE8/edit).
+Doc [here](https://docs.google.com/document/d/1gqSdT-nfqlwkdRbOqXKUY_XXxJQ3LouqXd0_QTCT2Z0/edit].
 
 ### Box
 
