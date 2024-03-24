@@ -14,7 +14,7 @@ Slides [here](https://docs.google.com/presentation/d/1k3huPGVXQNyoEpoVzcwHZrJ3Ed
 
 ### Box
 
-All data for this project is kept on Box.
+Raw data for this project is kept on Box.
 
 For filepaths, access it using `"~/Box/INFO 290T Project"` to ensure code is usable across all machines.
 
