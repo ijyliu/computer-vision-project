@@ -103,8 +103,11 @@ def main():
     enablePrint()
 
     # Check first, second value of feature_vectors
+    print('first and second feature vector')
     print(feature_vectors[0])
     print(feature_vectors[1])
+    print('length of first feature vector')
+    print(len(feature_vectors[0]))
     
     # Unnest each numpy array in feature_vectors into dataframe columns for hog_feature_vectors_df
     for i in range(len(feature_vectors[0])):
