@@ -40,7 +40,7 @@ def compute_hog(path: str) -> np.ndarray:
     # Compute HOG -------------------------------------------------------------------------
     pixels_per_cell = (24, 24) # Adjusted as per the image size
     cells_per_block = (3, 3) # Adjusted as per the image size
-    orientations = 9 # More orientations better for capturing the distinct features of the car
+    orientations = 4 # More orientations better for capturing the distinct features of the car
 
     hog_features = hog(img,
                        orientations = orientations,
