@@ -1,34 +1,27 @@
-#!/usr/bin/env python3
-# coding: utf-8
-
-import os
 import numpy as np
 from PIL import Image
 from skimage.color import rgb2gray
 from skimage.feature import hog
 
-
 # Function to compute HOG Features
 def compute_hog(path: str) -> np.ndarray:
     
     """
-    Compute Histogram of Oriented Gradients (HOG) features for all images within a specified directory.
+    Compute Histogram of Oriented Gradients (HOG) feature for a given image filepath.
 
-    This function processes the image found in the provided directory path, performing a series of preprocessing steps
-    including conversion to grayscale, rescaling to a standard size (256x256 pixels), and normalization of pixel intensity
-    values. It then computes the HOG features for each preprocessed image. The HOG feature extraction includes specifying
+    This function processes the image found, performing a series of preprocessing steps
+    including conversion to grayscale and normalization of pixel intensity
+    values. It then computes the HOG features. The HOG feature extraction includes specifying
     the number of orientations, pixels per cell, and cells per block to effectively capture the shape and texture 
     information of the image.
 
     Parameters:
-    - path (str): The directory path containing the image for which HOG features are to be computed.
+    - path (str): The path for the image for which HOG features are to be computed.
 
     Returns:
-    - np.ndarray: The number of columns in the array equals the dimensionality of the HOG feature space.
+    - np.ndarray: The size of the array equals the dimensionality of the HOG feature space.
 
     Note:
-    - The function assumes all images are of significant size and can be rescaled to 256x256. For images already at
-      this size, the rescaling step is effectively a no-op.
     - The function implicitly handles both grayscale and RGB images, converting RGB images to grayscale as part
       of preprocessing.
     """
@@ -44,15 +37,8 @@ def compute_hog(path: str) -> np.ndarray:
     if len(img.shape) > 2:
         img = rgb2gray(img)
 
-    # Rescaling (Optional if image is already 256X256) ------------------------------------
-#         standard = 256
-#         scale = standard / min(img.shape[:2])
-#         img = rescale(img, scale, anti_aliasing = True)
-#         img = img[int(img.shape[0]/2 - standard/2) : int(img.shape[0]/2 + standard/2),
-#                            int(img.shape[1]/2 - standard/2) : int(img.shape[1]/2 + standard/2)]
-
     # Compute HOG -------------------------------------------------------------------------
-    pixels_per_cell = (16, 16) # Adjusted as per the image size
+    pixels_per_cell = (24, 24) # Adjusted as per the image size
     cells_per_block = (3, 3) # Adjusted as per the image size
     orientations = 9 # More orientations better for capturing the distinct features of the car
 
