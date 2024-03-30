@@ -38,7 +38,7 @@ def compute_hog(path: str) -> np.ndarray:
         img = rgb2gray(img)
 
     # Compute HOG -------------------------------------------------------------------------
-    pixels_per_cell = (16, 16) # Adjusted as per the image size
+    pixels_per_cell = (24, 24) # Adjusted as per the image size
     cells_per_block = (3, 3) # Adjusted as per the image size
     orientations = 9 # More orientations better for capturing the distinct features of the car
 
