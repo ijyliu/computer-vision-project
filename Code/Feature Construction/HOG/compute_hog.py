@@ -4,7 +4,7 @@ from skimage.color import rgb2gray
 from skimage.feature import hog
 
 # Function to compute HOG Features
-def compute_hog(path: str) -> np.ndarray:
+def compute_hog(path: str, pixels_per_cell : tuple = (24, 24), cells_per_block : tuple = (3, 3), orientations : int = 4) -> np.ndarray:
     
     """
     Compute Histogram of Oriented Gradients (HOG) feature for a given image filepath.
@@ -38,10 +38,6 @@ def compute_hog(path: str) -> np.ndarray:
         img = rgb2gray(img)
 
     # Compute HOG -------------------------------------------------------------------------
-    pixels_per_cell = (24, 24) # Adjusted as per the image size
-    cells_per_block = (3, 3) # Adjusted as per the image size
-    orientations = 4 # More orientations better for capturing the distinct features of the car
-
     hog_features = hog(img,
                        orientations = orientations,
                        pixels_per_cell = pixels_per_cell,

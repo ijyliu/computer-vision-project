@@ -92,13 +92,29 @@ def main():
     print('value counts of test_80_20')
     print(hog_feature_vectors_df['test_80_20'].value_counts())
 
+    ####################################################################################################
+
+    # 24 pixels per cell run
+    hog_feature_vectors_df_24_ppc = hog_feature_vectors_df.copy()
+    # Settings
+    pixels_per_cell = (24, 24)
+    cells_per_block = (3, 3)
+    orientations = 4
+    # Convert to lists by repeating the same value for the number of images
+    pixels_per_cell_list = [pixels_per_cell] * len(paths)
+    cells_per_block_list = [cells_per_block] * len(paths)
+    orientations_list = [orientations] * len(paths)
+    print('ppc list head and length')
+    print(pixels_per_cell_list[:5])
+    print(len(pixels_per_cell_list))
+
     # Use a process pool to execute image processing in parallel
     # Turn off printing
     blockPrint()
     # Set up pool
     with ProcessPoolExecutor(max_workers=num_cpus) as executor:
         # Submit the image processing function to the executor using map
-        feature_vectors = list(executor.map(compute_hog, hog_feature_vectors_df['Image Path']))
+        feature_vectors = list(executor.map(compute_hog, hog_feature_vectors_df_24_ppc['Image Path'], pixels_per_cell_list, cells_per_block_list, orientations_list))
     # Enable printing
     enablePrint()
 
@@ -106,14 +122,53 @@ def main():
     print(feature_vectors[0])
     print(feature_vectors[1])
     
-    # Unnest each numpy array in feature_vectors into dataframe columns for hog_feature_vectors_df
+    # Unnest each numpy array in feature_vectors into dataframe columns for hog_feature_vectors_df_24_ppc
     for i in range(len(feature_vectors[0])):
-        hog_feature_vectors_df['hog_feature_' + str(i)] = [vector[i] for vector in feature_vectors]
+        hog_feature_vectors_df_24_ppc['hog_feature_' + str(i)] = [vector[i] for vector in feature_vectors]
     # Check dataframe
-    print(hog_feature_vectors_df.head())
+    print(hog_feature_vectors_df_24_ppc.head())
 
     # Split and output dataframe
-    split_df(hog_feature_vectors_df, 'hog_feature', '../../../Data/HOG', 10)
+    split_df(hog_feature_vectors_df_24_ppc, 'hog_feature_24_ppc', '../../../Data/HOG/24_ppc', 10)
+
+    ####################################################################################################
+
+    # 16 pixels per cell run
+    hog_feature_vectors_df_16_ppc = hog_feature_vectors_df.copy()
+    # Settings
+    pixels_per_cell = (16, 16)
+    cells_per_block = (3, 3)
+    orientations = 4
+    # Convert to lists by repeating the same value for the number of images
+    pixels_per_cell_list = [pixels_per_cell] * len(paths)
+    cells_per_block_list = [cells_per_block] * len(paths)
+    orientations_list = [orientations] * len(paths)
+    print('ppc list head and length')
+    print(pixels_per_cell_list[:5])
+    print(len(pixels_per_cell_list))
+
+    # Use a process pool to execute image processing in parallel
+    # Turn off printing
+    blockPrint()
+    # Set up pool
+    with ProcessPoolExecutor(max_workers=num_cpus) as executor:
+        # Submit the image processing function to the executor using map
+        feature_vectors = list(executor.map(compute_hog, hog_feature_vectors_df_16_ppc['Image Path'], pixels_per_cell_list, cells_per_block_list, orientations_list))
+    # Enable printing
+    enablePrint()
+
+    # Check first, second value of feature_vectors
+    print(feature_vectors[0])
+    print(feature_vectors[1])
+    
+    # Unnest each numpy array in feature_vectors into dataframe columns for hog_feature_vectors_df_16_ppc
+    for i in range(len(feature_vectors[0])):
+        hog_feature_vectors_df_16_ppc['hog_feature_' + str(i)] = [vector[i] for vector in feature_vectors]
+    # Check dataframe
+    print(hog_feature_vectors_df_16_ppc.head())
+
+    # Split and output dataframe
+    split_df(hog_feature_vectors_df_16_ppc, 'hog_feature_16_ppc', '../../../Data/HOG/16_ppc', 10)
 
     ####################################################################################################
 
@@ -121,7 +176,8 @@ def main():
     end_time = time.time()
 
     # Print time taken in minutes
-    ttm = (end_time - start_time) / 60
+    # Divide by 2 to account for fact we ran with 2 different pixels per cell settings
+    ttm = ((end_time - start_time) / 60) / 2
     print('Time taken (in minutes):', ttm)
 
     # Time per image
