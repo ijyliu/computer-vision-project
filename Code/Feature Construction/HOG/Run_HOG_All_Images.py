@@ -10,7 +10,7 @@ import shutil
 import time
 
 # Flag for a test/sample run
-sample_run = True
+sample_run = False
 # Feature name
 feature_name = 'HOG'
 # Blurred or No Blur images
@@ -129,13 +129,17 @@ def main():
     print(len(feature_vectors[0]))
 
     # Unnest each numpy array in feature_vectors into dataframe columns for variant_df
+    # Turn off printing
+    blockPrint()
     for i in range(len(feature_vectors[0])):
         variant_df[feature_name + '_' + str(i)] = [vector[i] for vector in feature_vectors]
+    # Enable printing
+    enablePrint()
     # Check dataframe
     print(variant_df.head())
 
     # Split and output dataframe
-    split_df(variant_df, feature_name, '../../../Data/Features' + feature_name, 10)
+    split_df(variant_df, feature_name, '../../../Data/Features/' + feature_name, 10)
 
     ####################################################################################################
 
@@ -172,13 +176,17 @@ def main():
     print(len(feature_vectors[0]))
 
     # Unnest each numpy array in feature_vectors into dataframe columns for variant_df
+    # Turn off printing
+    blockPrint()
     for i in range(len(feature_vectors[0])):
         variant_df[feature_name + '_' + str(i)] = [vector[i] for vector in feature_vectors]
+    # Enable printing
+    enablePrint()
     # Check dataframe
     print(variant_df.head())
 
     # Split and output dataframe
-    split_df(variant_df, feature_name, '../../../Data/Features' + feature_name, 10)
+    split_df(variant_df, feature_name, '../../../Data/Features/' + feature_name, 30)
 
     ####################################################################################################
 
