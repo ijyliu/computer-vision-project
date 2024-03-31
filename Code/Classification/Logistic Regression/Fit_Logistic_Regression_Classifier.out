@@ -1365,24 +1365,13 @@ hyperparameter settings
   warnings.warn(
 /scratch/users/ijyliu/conda/envs/scf_general/lib/python3.11/site-packages/sklearn/linear_model/_sag.py:350: ConvergenceWarning: The max_iter was reached which means the coef_ did not converge
   warnings.warn(
-/scratch/users/ijyliu/conda/envs/scf_general/lib/python3.11/site-packages/sklearn/linear_model/_sag.py:350: ConvergenceWarning: The max_iter was reached which means the coef_ did not converge
-  warnings.warn(
-/scratch/users/ijyliu/conda/envs/scf_general/lib/python3.11/site-packages/sklearn/linear_model/_sag.py:350: ConvergenceWarning: The max_iter was reached which means the coef_ did not converge
-  warnings.warn(
-/scratch/users/ijyliu/conda/envs/scf_general/lib/python3.11/site-packages/sklearn/linear_model/_sag.py:350: ConvergenceWarning: The max_iter was reached which means the coef_ did not converge
-  warnings.warn(
-/scratch/users/ijyliu/conda/envs/scf_general/lib/python3.11/site-packages/sklearn/linear_model/_sag.py:350: ConvergenceWarning: The max_iter was reached which means the coef_ did not converge
-  warnings.warn(
-/scratch/users/ijyliu/conda/envs/scf_general/lib/python3.11/site-packages/sklearn/linear_model/_sag.py:350: ConvergenceWarning: The max_iter was reached which means the coef_ did not converge
-  warnings.warn(
-/scratch/users/ijyliu/conda/envs/scf_general/lib/python3.11/site-packages/sklearn/linear_model/_sag.py:350: ConvergenceWarning: The max_iter was reached which means the coef_ did not converge
-  warnings.warn(
-tuned hyperparameters:  {'C': 1, 'class_weight': 'balanced', 'l1_ratio': 0.75, 'multi_class': 'ovr', 'penalty': 'elasticnet', 'solver': 'saga'}
-accuracy:  0.8494505494505497
-best model:  LogisticRegression(C=1, class_weight='balanced', l1_ratio=0.75, max_iter=1000,
-                   multi_class='ovr', penalty='elasticnet', solver='saga')
+tuned hyperparameters:  {'C': 0.01, 'class_weight': None, 'l1_ratio': 0.0, 'multi_class': 'multinomial', 'penalty': 'elasticnet', 'solver': 'saga'}
+accuracy:  0.8929633331035909
+best model:  LogisticRegression(C=0.01, l1_ratio=0.0, max_iter=1000,
+                   multi_class='multinomial', penalty='elasticnet',
+                   solver='saga')
 runtime in minutes
-3.379140293598175
+375.8492160836856
 runtime per image in minutes
-0.0511990953575481
-Time elapsed: 3 minute(s).
+0.056981385094555116
+Time elapsed: 375 minute(s).
