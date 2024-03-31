@@ -15,7 +15,7 @@ def compute_lbp(path: str, radius=1, n_points=8) -> np.ndarray:
     - n_points (int): Number of points sampled by the LBP operator.
 
     Returns:
-    - np.ndarray: The computed LBP feature vector.
+    - np.ndarray: The computed LBP feature histogram.
 
     Note:
     - The function handles both grayscale and RGB images, converting RGB images to grayscale as part
@@ -28,6 +28,11 @@ def compute_lbp(path: str, radius=1, n_points=8) -> np.ndarray:
     gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
 
     # Compute LBP
-    lbp = local_binary_pattern(gray, n_points, radius, method='uniform').flatten()
+    lbp_image = local_binary_pattern(gray, n_points, radius, method='uniform')
 
-    return lbp
+    # Compute histogram of LBP image
+    hist, _ = np.histogram(lbp_image.ravel(), bins=np.arange(0, 10), range=(0, 9))
+    hist = hist.astype("float")
+    hist /= (hist.sum() + 1e-7)  # Normalize
+
+    return hist
