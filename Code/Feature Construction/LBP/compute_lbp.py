@@ -28,6 +28,6 @@ def compute_lbp(path: str, radius=1, n_points=8) -> np.ndarray:
     gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
 
     # Compute LBP
-    lbp = local_binary_pattern(gray, n_points, radius, method='uniform')
+    lbp = local_binary_pattern(gray, n_points, radius, method='uniform').flatten()
 
     return lbp
