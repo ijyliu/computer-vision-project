@@ -51,7 +51,9 @@ hyperparameter_settings = {
     'max_depth': [10, 20, 30, None],
     'min_samples_split': [2, 5, 10],
     'min_samples_leaf': [1, 2, 4],
-    'bootstrap': [True, False]
+    'bootstrap': [True, False], 
+    'oob_score': [True, False],
+    'n_jobs': [-1]
 }
 
 print('hyperparameter settings')
