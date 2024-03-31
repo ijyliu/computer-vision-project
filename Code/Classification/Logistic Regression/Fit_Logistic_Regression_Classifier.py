@@ -14,7 +14,7 @@ import time
 ##################################################################################################
 
 # Sample run or not
-sample_run = True
+sample_run = False
 
 ##################################################################################################
 
@@ -50,16 +50,21 @@ if sample_run:
 ##################################################################################################
 
 # Hyperparameter Settings
-# Penalty: none, L1, L2
-# A bunch of C values
-# Balanced Class Weights: yes, no
-# Multi-Class Strategy: one-vs-rest, multinomial
-# A bunch of solvers
-hyperparameter_settings = [{'penalty':[None, 'elasticnet', 'l1', 'l2']},
-                           {'C':[0.001, 0.01, 0.1, 1, 10, 100]},
-                           {'class_weight':['balanced', None]},
-                           {'multi_class':['ovr', 'multinomial']},
-                           {'solver':['newton-cg', 'lbfgs', 'liblinear', 'sag', 'saga']}]
+hyperparameter_settings = [
+    # Non-penalized
+    {'solver': ['newton-cg', 'lbfgs', 'sag', 'saga'], 
+     'penalty': [None], 
+     'C': [1],  # C is irrelevant here but required as a placeholder
+     'class_weight': [None, 'balanced'], 
+     'multi_class': ['ovr', 'multinomial']},
+    # ElasticNet penalty
+    {'solver': ['saga'], 
+     'penalty': ['elasticnet'], 
+     'C': [0.001, 0.01, 0.1, 1, 10, 100], 
+     'l1_ratio': [0.0, 0.25, 0.5, 0.75, 1.0], 
+     'class_weight': [None, 'balanced'], 
+     'multi_class': ['ovr', 'multinomial']}
+]
 print('hyperparameter settings')
 print(hyperparameter_settings)
 
@@ -79,13 +84,14 @@ X = scaler.fit_transform(X)
 
 # Fit model
 # Perform grid search with 5 fold cross validation
-clf = GridSearchCV(LogisticRegression(), hyperparameter_settings, cv=5).fit(X, y)
+lr = LogisticRegression(max_iter=1000) # higher to encourage convergence
+clf = GridSearchCV(lr, hyperparameter_settings, scoring='accuracy', cv=5, n_jobs=-1).fit(X, y)
 
 print("tuned hyperparameters: ", clf.best_params_)
 print("accuracy: ", clf.best_score_)
 
 # Save
-joblib.dump(clf, "Best Logistic Regression Model.pkl") 
+joblib.dump(clf.best_params_, "Best Logistic Regression Model.pkl") 
 
 ##################################################################################################
 
