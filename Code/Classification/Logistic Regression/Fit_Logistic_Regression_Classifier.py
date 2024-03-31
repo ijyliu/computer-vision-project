@@ -85,13 +85,14 @@ X = scaler.fit_transform(X)
 # Fit model
 # Perform grid search with 5 fold cross validation
 lr = LogisticRegression(max_iter=1000) # higher to encourage convergence
-clf = GridSearchCV(lr, hyperparameter_settings, scoring='accuracy', cv=5, n_jobs=-1).fit(X, y)
+gs = GridSearchCV(lr, hyperparameter_settings, scoring='accuracy', cv=5, n_jobs=-1).fit(X, y)
 
-print("tuned hyperparameters: ", clf.best_params_)
-print("accuracy: ", clf.best_score_)
+print("tuned hyperparameters: ", gs.best_params_)
+print("accuracy: ", gs.best_score_)
+print("best model: ", gs.best_estimator_)
 
-# Save
-joblib.dump(clf.best_params_, "Best Logistic Regression Model.pkl") 
+# Dump the best model to a file
+joblib.dump(gs.best_estimator_, 'Best Logistic Regression Model.joblib')
 
 ##################################################################################################
 
