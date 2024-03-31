@@ -102,7 +102,7 @@ def main():
     # Convert to lists by repeating the same value for the number of images
     radius_list = [radius] * len(paths)
     n_points_list = [n_points] * len(paths)
-    print('Radii and Points')
+    print('Radii')
     print(radius_list[:5])
     print(len(radius_list))
 
