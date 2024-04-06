@@ -1,6 +1,6 @@
 #!/bin/bash
-#SBATCH --job-name=Vision_Transformer_H_SCF
-#SBATCH --output=Vision_Transformer_H_SCF.out
+#SBATCH --job-name=VGG_SCF
+#SBATCH --output=VGG_SCF.out
 #SBATCH --partition=jsteinhardt
 #SBATCH --gres=gpu:A100:1
 
@@ -9,7 +9,7 @@
 SECONDS=0
 
 # Run script
-python Vision_Transformer_H_SCF.py
+python VGG_SCF.py
 
 # Calculate time in minutes
 elapsed_minutes=$((SECONDS / 60))

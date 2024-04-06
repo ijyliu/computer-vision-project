@@ -1,12 +1,12 @@
 import numpy as np
-from tensorflow.keras.preprocessing.image import img_to_array, load_img
-from tensorflow.keras.applications import VGG16
-from tensorflow.keras.applications.vgg16 import preprocess_input
+#from tensorflow.keras.preprocessing.image import img_to_array, load_img
+#from tensorflow.keras.applications import VGG16
+#from tensorflow.keras.applications.vgg16 import preprocess_input
 import torch
-import torchvision.models as models
+#import torchvision.models as models
 import torchvision.transforms as transforms
 from PIL import Image
-
+import torch.nn as nn
 
 # Preprocess the image to convert to a suitable format for VGG16
 def load_and_preprocess_image(image_path, target_size=(224, 224)):
@@ -19,16 +19,9 @@ def load_and_preprocess_image(image_path, target_size=(224, 224)):
     image = transform(image).unsqueeze(0)
     return image
     
-# Set up device
-device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
-
-def compute_vgg16(image_path):
+def compute_vgg16(model, device, image_path):
     """Compute VGG16 features"""
     
-    # Load the pretrained VGG16 model
-    model = models.vgg16(pretrained=True).features.to(device)
-    model.eval()  # Set the model to inference mode
-
     # Load and preprocess the image
     image = load_and_preprocess_image(image_path).to(device)
 
