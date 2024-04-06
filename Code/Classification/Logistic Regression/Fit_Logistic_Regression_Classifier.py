@@ -53,7 +53,7 @@ if sample_run:
 # Hyperparameter Settings
 hyperparameter_settings = [
     # Non-penalized
-    {'solver': ['lbfgs'], 
+    {'solver': ['saga'], 
      'penalty': [None], 
      'C': [1],  # C is irrelevant here but required as a placeholder
      'class_weight': [None, 'balanced'], 
