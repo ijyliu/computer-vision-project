@@ -14,13 +14,13 @@ start_time = time.time()
 ####################################################################################################
 
 # Packages
-from PIL import Image
+#from PIL import Image
 import os
 import shutil
 import warnings
 warnings.filterwarnings('ignore')
 import pandas
-import numpy as np
+#import numpy as np
 # from tensorflow.keras.preprocessing.image import img_to_array, load_img
 # from tensorflow.keras.applications import VGG16
 # from tensorflow.keras.applications.vgg16 import preprocess_input
