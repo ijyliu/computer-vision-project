@@ -35,5 +35,9 @@ def compute_vgg16(image_path):
     # Extract features
     with torch.no_grad():
         features = model(image)
+
+        # Add a pooling layer to convert features from (1, 512, 7, 7) to (1, 512, 1, 1)
+        features = nn.AdaptiveAvgPool2d((1, 1))(features)
+        features = features.view(features.size(0), -1)
     
     return features
