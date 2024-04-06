@@ -38,8 +38,6 @@ def combine_directory_parquets(directory_path):
     # Return combined dataframe
     return combined_df
 training_data = combine_directory_parquets('../../../Data/Features/All Features/train')
-# Drop Image Path, test_80_20
-training_data = training_data.drop(columns=['Image Path', 'test_80_20'])
 print('all training data')
 print(training_data)
 
@@ -52,7 +50,7 @@ if sample_run:
 # Hyperparameter Settings
 hyperparameter_settings = [
     # Non-penalized
-    {'solver': ['newton-cg', 'lbfgs', 'sag', 'saga'], 
+    {'solver': ['lbfgs'], 
      'penalty': [None], 
      'C': [1],  # C is irrelevant here but required as a placeholder
      'class_weight': [None, 'balanced'], 
@@ -71,7 +69,9 @@ print(hyperparameter_settings)
 ##################################################################################################
 
 # Create matrices for training
-X = training_data.drop(columns=['Class'])
+# X is all numeric columns, y is 'Class'
+num_cols = training_data.select_dtypes(include=['float64', 'int64']).columns
+X = training_data[num_cols]
 y = training_data['Class']
 
 ##################################################################################################
