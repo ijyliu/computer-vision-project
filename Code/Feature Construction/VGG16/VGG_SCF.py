@@ -129,6 +129,11 @@ print(vgg_embeddings_df)
 # Split dataset into pieces
 num_pieces = 8
 total_len_pieces = 0
+# Create folders if they don't exist
+if not os.path.exists(r'../../../Data/Features/VGG'):
+    os.makedirs(r'../../../Data/Features/VGG')
+if not os.path.exists(r'../../../Data/Features/VGG_Sample'):
+    os.makedirs(r'../../../Data/Features/VGG_Sample')
 # Delete previous pieces, all contents of '../../../Data/Features/VGG'
 folder = r'../../../Data/Features/VGG'
 for filename in os.listdir(folder):
