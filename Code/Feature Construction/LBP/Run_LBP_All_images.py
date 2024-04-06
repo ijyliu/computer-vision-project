@@ -97,8 +97,8 @@ def main():
     feature_name = 'LBP'
     variant_df = feature_vectors_df.copy()
     # Settings
-    radius = 1
-    n_points = 8 
+    radius = 3
+    n_points = 24
     # Convert to lists by repeating the same value for the number of images
     radius_list = [radius] * len(paths)
     n_points_list = [n_points] * len(paths)

@@ -2,7 +2,7 @@ import cv2
 from skimage.feature import local_binary_pattern
 import numpy as np
 
-def compute_lbp(path: str, radius=1, n_points=8) -> np.ndarray:
+def compute_lbp(path: str, radius=3, n_points=24) -> np.ndarray:
     """
     Compute Local Binary Pattern (LBP) feature histogram for a given image filepath.
 
