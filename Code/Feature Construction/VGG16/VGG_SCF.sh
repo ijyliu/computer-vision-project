@@ -1,7 +1,7 @@
 #!/bin/bash
 #SBATCH --job-name=VGG_SCF
 #SBATCH --output=VGG_SCF.out
-#SBATCH --partition=jsteinhardt
+#SBATCH --partition=yss
 #SBATCH --gres=gpu:A100:1
 
 # Timing

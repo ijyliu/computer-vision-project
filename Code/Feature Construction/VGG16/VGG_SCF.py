@@ -3,7 +3,7 @@
 ####################################################################################################
 
 # Flag for whether this is a sample run or not
-sample_run = True
+sample_run = False
 
 ####################################################################################################
 
@@ -146,19 +146,18 @@ for filename in os.listdir(folder):
     except Exception as e:
         print('Failed to delete %s. Reason: %s' % (file_path, e))
 # Save pieces
-if not sample_run:
-    for i in range(num_pieces):
-        # start index for piece rows
-        start_index = i * len(vgg_embeddings_df) // num_pieces
-        # end index for piece rows
-        end_index = (i + 1) * len(vgg_embeddings_df) // num_pieces
-        # get piece
-        piece = vgg_embeddings_df[start_index:end_index]
-        piece.to_parquet(r'../../../Data/Features/VGG/VGG Embeddings_piece_' + str(i) + '.parquet', index=False)
-        print(len(piece))
-        total_len_pieces += len(piece)
-    # save 100 row sample
-    vgg_embeddings_df.sample(100).to_parquet(r'../../../Data/Features/VGG_Sample/VGG Embeddings_sample.parquet', index=False)
+for i in range(num_pieces):
+    # start index for piece rows
+    start_index = i * len(vgg_embeddings_df) // num_pieces
+    # end index for piece rows
+    end_index = (i + 1) * len(vgg_embeddings_df) // num_pieces
+    # get piece
+    piece = vgg_embeddings_df[start_index:end_index]
+    piece.to_parquet(r'../../../Data/Features/VGG/VGG Embeddings_piece_' + str(i) + '.parquet', index=False)
+    print(len(piece))
+    total_len_pieces += len(piece)
+# save 100 row sample
+vgg_embeddings_df.sample(100).to_parquet(r'../../../Data/Features/VGG_Sample/VGG Embeddings_sample.parquet', index=False)
 
 # check total piece length and length of vgg_embeddings_df
 print('length check')
