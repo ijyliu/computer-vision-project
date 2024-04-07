@@ -11,8 +11,7 @@ SECONDS=0
 
 echo "Starting Job"
 
-# Execute the notebook
-jupyter nbconvert --to notebook --execute --inplace PCA_Transformations.ipynb
+python PCA_Transformations.py
 
 echo "Completed Job"
 

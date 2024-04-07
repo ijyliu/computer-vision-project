@@ -13,12 +13,12 @@ import shutil
 
 # Set up number of components to keep for each item feature_matrix_labels here, based on the plot results
 num_components_to_keep = {
-    'HOG 16 PPC': 1000,
-    'HOG 24 PPC': 400,
-    'HSV': 400,
-    'LBP': 10,
-    'VGG': 400,
-    'Vision Transformer': 400,
+    'HOG 16 PPC Features': 1000,
+    'HOG 24 PPC Features': 400,
+    'HSV Features': 400,
+    'LBP Features': 10,
+    'VGG Features': 400,
+    'Vision Transformer Features': 400,
     'All Features': 1500
 }
 
@@ -90,17 +90,27 @@ transformed_df_test_all_features = [df for df in transformed_dfs_test if 'All Fe
 
 # Add on string columns from all_features_train and all_features_test
 all_features_train_string_cols = [col for col in all_features_train.columns if all_features_train[col].dtype == 'object']
+all_features_train_string_part = all_features_train[all_features_train_string_cols]
+print('all features train string part')
+print(all_features_train_string_part)
 all_features_test_string_cols = [col for col in all_features_test.columns if all_features_test[col].dtype == 'object']
-transformed_df_train_individual_features = pd.concat([all_features_train[all_features_train_string_cols], transformed_df_train_individual_features], axis=1)
+all_features_test_string_part = all_features_test[all_features_test_string_cols]
+print('all features test string part')
+print(all_features_test_string_part)
+transformed_df_train_individual_features = pd.concat([all_features_train_string_part.reset_index(drop=True), 
+                                                      transformed_df_train_individual_features.reset_index(drop=True)], axis=1)
 print('transformed_df_train_individual_features')
 print(transformed_df_train_individual_features)
-transformed_df_test_individual_features = pd.concat([all_features_test[all_features_test_string_cols], transformed_df_test_individual_features], axis=1)
+transformed_df_test_individual_features = pd.concat([all_features_test_string_part.reset_index(drop=True), 
+                                                     transformed_df_test_individual_features.reset_index(drop=True)], axis=1)
 print('transformed_df_test_individual_features')
 print(transformed_df_test_individual_features)
-transformed_df_train_all_features = pd.concat([all_features_train[all_features_train_string_cols], transformed_df_train_all_features], axis=1)
+transformed_df_train_all_features = pd.concat([all_features_train_string_part.reset_index(drop=True), 
+                                               transformed_df_train_all_features.reset_index(drop=True)], axis=1)
 print('transformed_df_train_all_features')
 print(transformed_df_train_all_features)
-transformed_df_test_all_features = pd.concat([all_features_test[all_features_test_string_cols], transformed_df_test_all_features], axis=1)
+transformed_df_test_all_features = pd.concat([all_features_test_string_part.reset_index(drop=True), 
+                                              transformed_df_test_all_features.reset_index(drop=True)], axis=1)
 print('transformed_df_test_all_features')
 print(transformed_df_test_all_features)
 
