@@ -48,6 +48,11 @@ def fit_logistic_regression_classifier(X_train, y_train, classifier_name):
     '''
     Fits a logistic regression classifier to the training data matrices.
     '''
+
+    # Make output directories if they do not exist
+    if not os.path.exists('../../../Output/Classifier Fitting/Logistic Regression/'):
+        os.makedirs('../../../Output/Classifier Fitting/Logistic Regression/')
+
     # Hyperparameter Settings
     hyperparameter_settings = [
         # Non-penalized
@@ -113,15 +118,40 @@ def make_predictions(test_data, X_test, classifier_name):
     Makes predictions on the test data using the best model.
     '''
 
+    # Make output directories if they do not exist
+    if not os.path.exists('../../../Output/Classifier Inference/Logistic Regression/'):
+        os.makedirs('../../../Output/Classifier Inference/Logistic Regression/')
+    if not os.path.exists('../../../Data/Predictions/Logistic Regression/'):
+        os.makedirs('../../../Data/Predictions/Logistic Regression/')
+
     # Load model
     best_model = joblib.load('../../../Output/Classifier Fitting/Logistic Regression/' + classifier_name + ' Best Model.joblib')
     print('best model')
     print(best_model)
 
+    # Start timer
+    start_time = time.time()
+
     # Predictions
     predictions = best_model.predict(X_test)
     print('predictions head')
     print(predictions[:5])
+
+    # End timer
+    end_time = time.time()
+
+    # Statistics
+    runtime_minutes = (end_time - start_time) / 60
+    print("prediction time in minutes: ", runtime_minutes)
+    runtime_per_image = runtime_minutes / len(test_data)
+    print("prediction time per image in minutes: ", runtime_per_image)
+    # Create dataframe
+    prediction_statistics_df = pd.DataFrame({
+        'runtime_minutes': [runtime_minutes],
+        'runtime_per_image': [runtime_per_image]
+    })
+    # Output to Excel
+    prediction_statistics_df.to_excel('../../../Output/Classifier Inference/Logistic Regression/' + classifier_name + ' Prediction Statistics.xlsx', index=False)
 
     # Add to test_data
     test_data['Logistic_Regression_Classification'] = predictions
