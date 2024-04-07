@@ -4,6 +4,7 @@
 #SBATCH --partition=jsteinhardt
 #SBATCH --ntasks=1
 #SBATCH --cpus-per-task=16
+#SBATCH --gres=gpu:A100:1
 
 # Timing
 # Reset the SECONDS variable
