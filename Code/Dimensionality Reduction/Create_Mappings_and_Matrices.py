@@ -34,9 +34,9 @@ def create_mappings_and_matrices():
     print(all_features_train)
 
     # Create column y
-    # Encode Corrected Old Class as 0 for SUV, 1 for Sedan, 2 for Pickup, 3 for Convertible
+    # Encode Class as 0 for SUV, 1 for Sedan, 2 for Pickup, 3 for Convertible
     class_mapping = {'SUV': 0, 'Sedan': 1, 'Pickup': 2, 'Convertible': 3}
-    y = all_features_train['Corrected Old Class'].map(class_mapping)
+    y = all_features_train['Class'].map(class_mapping)
     print('first 5 y values:', y[:5])
 
     # Create Feature Matrices - Update This Code As More Features Are Added
