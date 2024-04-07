@@ -5,6 +5,7 @@ import os
 import pandas as pd
 import numpy as np
 from sklearn.preprocessing import StandardScaler
+from sklearn.decomposition import PCA
 
 # Function for loading features from parquet files
 def combine_directory_parquets(directory_path):
@@ -75,3 +76,17 @@ def create_mappings_and_matrices():
 
     # Return constructed items
     return y, class_mapping, feature_matrices, feature_matrices_rescaled, feature_matrix_labels
+
+def get_PCA(X_list, n_components):
+  '''
+  Takes as input a list of feature matrices and returns a list of PCA objects and a list of transformed feature matrices.
+  '''
+  pca_list = []
+  xpca_list = []
+  for X in X_list:
+    # PCA
+    pca = PCA(n_components=n_components).fit(X) # not using whiten because it isn't rescaling but something else
+    X_pca = pca.transform(X)
+    pca_list.append(pca)
+    xpca_list.append(X_pca)
+  return pca_list, xpca_list
