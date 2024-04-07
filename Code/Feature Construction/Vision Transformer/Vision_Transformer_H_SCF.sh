@@ -4,8 +4,14 @@
 #SBATCH --partition=jsteinhardt
 #SBATCH --gres=gpu:A100:1
 
-echo "Starting ViT Embedding Creation"
+# Timing
+# Reset the SECONDS variable
+SECONDS=0
 
+# Run script
 python Vision_Transformer_H_SCF.py
 
-echo "Completed ViT Embedding Creation"
+# Calculate time in minutes
+elapsed_minutes=$((SECONDS / 60))
+# Print the time elapsed in minutes
+echo "Time elapsed: $elapsed_minutes minute(s)."

@@ -1,0 +1,6 @@
+SUV
+Sedan
+Convertible
+Pickup
+Clearly None of the 4
+Ambiguous
