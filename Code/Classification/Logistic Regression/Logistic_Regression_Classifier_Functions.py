@@ -108,7 +108,7 @@ def fit_logistic_regression_classifier(X_train, y_train, classifier_name):
     joblib.dump(hyperparameter_settings, '../../../Output/Classifier Fitting/Logistic Regression/' + classifier_name + ' Hyperparameter Settings.joblib')
     joblib.dump(tuned_hyperparameters, '../../../Output/Classifier Fitting/Logistic Regression/' + classifier_name + ' Tuned Hyperparameters.joblib')
 
-def make_predictions(X_test, classifier_name):
+def make_predictions(test_data, X_test, classifier_name):
     '''
     Makes predictions on the test data using the best model.
     '''
@@ -127,7 +127,7 @@ def make_predictions(X_test, classifier_name):
     test_data['Logistic_Regression_Classification'] = predictions
 
     # Keep only string items in test_data
-    test_data = test_data[[col for col in test_data.columns if type(col) == str]]
+    limited_test_data = test_data[[col for col in test_data.columns if col not in test_data.select_dtypes(include=np.number).columns]]
 
     # Save to excel
-    test_data.to_excel('../../../Data/Predictions/Logistic Regression/Logistic_Regression_Classifier_Predictions_' + classifier_name + '.xlsx', index=False)
+    limited_test_data.to_excel('../../../Data/Predictions/Logistic Regression/Logistic_Regression_Classifier_Predictions_' + classifier_name + '.xlsx', index=False)
