@@ -1,0 +1,201 @@
+Starting Job
+all features train
+           Class  ... VGG_Embedding_Element_511
+0          Sedan  ...                  0.000000
+1    Convertible  ...                  0.068858
+2         Pickup  ...                  0.134851
+3          Sedan  ...                  0.000000
+4          Sedan  ...                  0.000000
+..           ...  ...                       ...
+371        Sedan  ...                  0.000000
+372       Pickup  ...                  0.323551
+373          SUV  ...                  0.000000
+374          SUV  ...                  0.000000
+375        Sedan  ...                  0.277217
+
+[6003 rows x 11949 columns]
+all features test
+     Class  ... VGG_Embedding_Element_511
+0    Sedan  ...                  0.000000
+1    Sedan  ...                  0.023107
+2    Sedan  ...                  0.078218
+3      SUV  ...                  0.202087
+4      SUV  ...                  0.071901
+..     ...  ...                       ...
+88     SUV  ...                  0.133997
+89   Sedan  ...                  0.015856
+90   Sedan  ...                  0.172020
+91     SUV  ...                  0.098992
+92  Pickup  ...                  0.000000
+
+[1489 rows x 11949 columns]
+all features train
+           Class  ... VGG_Embedding_Element_511
+0          Sedan  ...                  0.000000
+1    Convertible  ...                  0.068858
+2         Pickup  ...                  0.134851
+3          Sedan  ...                  0.000000
+4          Sedan  ...                  0.000000
+..           ...  ...                       ...
+371        Sedan  ...                  0.000000
+372       Pickup  ...                  0.323551
+373          SUV  ...                  0.000000
+374          SUV  ...                  0.000000
+375        Sedan  ...                  0.277217
+
+[6003 rows x 11949 columns]
+all features test
+     Class  ... VGG_Embedding_Element_511
+0    Sedan  ...                  0.000000
+1    Sedan  ...                  0.023107
+2    Sedan  ...                  0.078218
+3      SUV  ...                  0.202087
+4      SUV  ...                  0.071901
+..     ...  ...                       ...
+88     SUV  ...                  0.133997
+89   Sedan  ...                  0.015856
+90   Sedan  ...                  0.172020
+91     SUV  ...                  0.098992
+92  Pickup  ...                  0.000000
+
+[1489 rows x 11949 columns]
+first 5 y values: 0    1
+1    3
+2    2
+3    1
+4    1
+Name: Class, dtype: int64
+HOG_16_ppc features shape: (6003, 7056)
+HOG_16_ppc features shape: (1489, 7056)
+HOG_24_ppc features shape: (6003, 2304)
+HOG_24_ppc features shape: (1489, 2304)
+HSV features shape: (6003, 768)
+HSV features shape: (1489, 768)
+LBP features shape: (6003, 25)
+LBP features shape: (1489, 25)
+VGG features shape: (6003, 512)
+VGG features shape: (1489, 512)
+ViT features shape: (6003, 1280)
+ViT features shape: (1489, 1280)
+items in all_features_df_train columns not in feature groups (hog, vgg, etc.): []
+all features shape: (6003, 11945)
+sum of smaller features matrix widths:  11945
+items in all_features_df_test columns not in feature groups (hog, vgg, etc.): []
+all features shape: (1489, 11945)
+sum of smaller features matrix widths:  11945
+y_train and class column numpy arrays are equal: True
+y_test and class column numpy arrays are equal: True
+operating on label  HOG 16 PPC Features
+number of components to keep: 1000
+operating on label  HOG 24 PPC Features
+number of components to keep: 400
+operating on label  HSV Features
+number of components to keep: 400
+operating on label  LBP Features
+number of components to keep: 10
+operating on label  VGG Features
+number of components to keep: 400
+operating on label  Vision Transformer Features
+number of components to keep: 400
+operating on label  All Features
+number of components to keep: 1500
+all features train string part
+           Class  ...                                 image_path_no_blur
+0          Sedan  ...  ../../../Images/train/No_Blur/Sedan_train_orig...
+1    Convertible  ...  ../../../Images/train/No_Blur/Convertible_trai...
+2         Pickup  ...  ../../../Images/train/No_Blur/SUV_train_orig_t...
+3          Sedan  ...  ../../../Images/train/No_Blur/Sedan_train_orig...
+4          Sedan  ...  ../../../Images/train/No_Blur/Sedan_train_orig...
+..           ...  ...                                                ...
+371        Sedan  ...  ../../../Images/train/No_Blur/Sedan_train_orig...
+372       Pickup  ...  ../../../Images/train/No_Blur/Pickup_train_ori...
+373          SUV  ...  ../../../Images/train/No_Blur/SUV_train_orig_t...
+374          SUV  ...  ../../../Images/train/No_Blur/SUV_train_orig_t...
+375        Sedan  ...  ../../../Images/train/No_Blur/Sedan_train_orig...
+
+[6003 rows x 4 columns]
+all features test string part
+     Class  ...                                 image_path_no_blur
+0    Sedan  ...  ../../../Images/test/No_Blur/Sedan_test_orig_t...
+1    Sedan  ...  ../../../Images/test/No_Blur/Sedan_test_orig_t...
+2    Sedan  ...  ../../../Images/test/No_Blur/Sedan_test_orig_t...
+3      SUV  ...  ../../../Images/test/No_Blur/SUV_test_orig_tes...
+4      SUV  ...  ../../../Images/test/No_Blur/SUV_test_orig_tra...
+..     ...  ...                                                ...
+88     SUV  ...  ../../../Images/test/No_Blur/SUV_test_orig_tes...
+89   Sedan  ...  ../../../Images/test/No_Blur/Sedan_test_orig_t...
+90   Sedan  ...  ../../../Images/test/No_Blur/Sedan_test_orig_t...
+91     SUV  ...  ../../../Images/test/No_Blur/SUV_test_orig_tes...
+92  Pickup  ...  ../../../Images/test/No_Blur/Pickup_test_orig_...
+
+[1489 rows x 4 columns]
+transformed_df_train_individual_features
+            Class  ... Vision Transformer Features_PCA_399
+0           Sedan  ...                            0.458939
+1     Convertible  ...                            0.593786
+2          Pickup  ...                            0.565968
+3           Sedan  ...                           -0.689774
+4           Sedan  ...                            0.473565
+...           ...  ...                                 ...
+5998        Sedan  ...                           -0.196881
+5999       Pickup  ...                            0.281803
+6000          SUV  ...                           -0.400614
+6001          SUV  ...                           -0.379804
+6002        Sedan  ...                           -0.022152
+
+[6003 rows x 2614 columns]
+transformed_df_test_individual_features
+       Class  ... Vision Transformer Features_PCA_399
+0      Sedan  ...                           -0.298230
+1      Sedan  ...                           -0.827068
+2      Sedan  ...                           -0.005284
+3        SUV  ...                           -0.073035
+4        SUV  ...                           -0.229771
+...      ...  ...                                 ...
+1484     SUV  ...                           -0.044536
+1485   Sedan  ...                            0.267982
+1486   Sedan  ...                           -0.449659
+1487     SUV  ...                            0.065352
+1488  Pickup  ...                            0.678279
+
+[1489 rows x 2614 columns]
+transformed_df_train_all_features
+            Class  ... All Features_PCA_1499
+0           Sedan  ...              1.261893
+1     Convertible  ...              0.243699
+2          Pickup  ...             -1.181670
+3           Sedan  ...              0.292066
+4           Sedan  ...              0.892312
+...           ...  ...                   ...
+5998        Sedan  ...             -0.396586
+5999       Pickup  ...             -1.423108
+6000          SUV  ...             -0.028003
+6001          SUV  ...              0.962390
+6002        Sedan  ...              0.240311
+
+[6003 rows x 1504 columns]
+transformed_df_test_all_features
+       Class  ... All Features_PCA_1499
+0      Sedan  ...             -0.279664
+1      Sedan  ...             -0.938659
+2      Sedan  ...             -0.479993
+3        SUV  ...             -0.364402
+4        SUV  ...             -0.227615
+...      ...  ...                   ...
+1484     SUV  ...             -0.901299
+1485   Sedan  ...              1.683846
+1486   Sedan  ...              0.587958
+1487     SUV  ...              0.430784
+1488  Pickup  ...              0.502231
+
+[1489 rows x 1504 columns]
+length check passed
+True
+length check passed
+True
+length check passed
+True
+length check passed
+True
+Completed Job
+Time elapsed: 3 minute(s).
