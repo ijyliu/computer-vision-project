@@ -8,6 +8,7 @@ import sklearn
 import os
 from sklearn.linear_model import LogisticRegression
 from sklearn.model_selection import GridSearchCV
+from sklearn.inspection import permutation_importance
 import joblib
 import time
 import numpy as np
@@ -161,3 +162,29 @@ def make_predictions(test_data, X_test, classifier_name):
 
     # Save to excel
     limited_test_data.to_excel('../../../Data/Predictions/Logistic Regression/Logistic_Regression_Classifier_Predictions_' + classifier_name + '.xlsx', index=False)
+
+def permutation_importance(best_model, X_test, y_test, feature_names, classifier_name):
+    '''
+    Performs permutation importance on the best model.
+    '''
+
+    # Permutation importance
+    # Perform permutation importance
+    result = permutation_importance(best_model, X_test, y_test, n_repeats=1000, random_state=222, n_jobs=-1)
+
+    # Check lengths
+    print('length of feature names: ', len(feature_names))
+    print('importances: ', len(result.importances_mean))
+    print('stds: ', len(result.importances_std))
+
+    print('importances mean')
+    print(result.importances_mean)
+
+    print('imp std')
+    print(result.importances_std)
+
+    # Put column name, mean and std in a dataframe
+    result = pd.DataFrame({'feature': feature_names, 'mean': result.importances_mean, 'std': result.importances_std})
+
+    # Output to Excel
+    result.to_excel('../../../Output/Classifier Inference/Logistic Regression/' + classifier_name + ' Permutation Importance.xlsx', index=False)
