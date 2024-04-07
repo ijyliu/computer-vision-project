@@ -39,8 +39,10 @@ for col in train_df.columns:
 ##################################################################################################
 
 # Limit to numeric columns + 'Class'
-train_df_num_cols = train_df.select_dtypes(include=np.number).columns
-train_df = train_df[train_df_num_cols + ['Class']]
+train_df_num_cols = list(train_df.select_dtypes(include=np.number).columns)
+train_df_cols_to_keep = train_df_num_cols
+train_df_cols_to_keep.append('Class')
+train_df = train_df[train_df_cols_to_keep]
 
 # Print out column names
 print('column names')
@@ -62,4 +64,4 @@ os.makedirs('../../../Output/Classifier Fitting/Autogluon/Autogluon_Tabular_Only
 import numpy as np
 np.random.seed(222)
 # Run predictor
-predictor = TabularPredictor(label='Class', path='../../../Output/Classifier Fitting/Autogluon/Autogluon_Tabular_Only_SCF_Medium_Presets').fit(train_data=train_data, presets='medium_quality')
+predictor = TabularPredictor(label='Class', path='../../../Output/Classifier Fitting/Autogluon/Autogluon_Tabular_Only_SCF_Medium_Presets').fit(train_data=train_data, presets='medium_quality', excluded_model_types = ['KNN'])

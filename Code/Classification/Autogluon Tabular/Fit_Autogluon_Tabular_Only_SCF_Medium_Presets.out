@@ -1,0 +1,119 @@
+Starting Job
+Warning: path already exists! This predictor may overwrite an existing predictor! path="../../../Output/Classifier Fitting/Autogluon/Autogluon_Tabular_Only_SCF_Medium_Presets"
+Presets specified: ['medium_quality']
+Warning: Training may take a very long time because `time_limit` was not specified and `train_data` is large (6003 samples, 349.32 MB).
+	Consider setting `time_limit` to ensure training finishes within an expected duration or experiment with a small portion of `train_data` to identify an ideal `presets` and `hyperparameters` configuration.
+Beginning AutoGluon training ...
+AutoGluon will save models to "../../../Output/Classifier Fitting/Autogluon/Autogluon_Tabular_Only_SCF_Medium_Presets"
+=================== System Info ===================
+AutoGluon Version:  1.0.0
+Python Version:     3.11.8
+Operating System:   Linux
+Platform Machine:   x86_64
+Platform Version:   #93-Ubuntu SMP Tue Sep 5 17:16:10 UTC 2023
+CPU Count:          48
+Memory Avail:       103.12 GB / 125.53 GB (82.1%)
+Disk Space Avail:   52027.92 GB / 66676.08 GB (78.0%)
+===================================================
+Train Data Rows:    6003
+Train Data Columns: 11945
+Label Column:       Class
+AutoGluon infers your prediction problem is: 'multiclass' (because dtype of label-column == object).
+	4 unique label values:  ['Sedan', 'Convertible', 'Pickup', 'SUV']
+	If 'multiclass' is not the correct problem_type, please manually specify the problem_type parameter during predictor init (You may specify problem_type as one of: ['binary', 'multiclass', 'regression'])
+Problem Type:       multiclass
+Preprocessing data ...
+/scratch/users/ijyliu/conda/envs/scf_general/lib/python3.11/site-packages/autogluon/tabular/learner/default_learner.py:189: FutureWarning: A value is trying to be set on a copy of a DataFrame or Series through chained assignment using an inplace method.
+The behavior will change in pandas 3.0. This inplace method will never work because the intermediate object on which we are setting values always behaves as a copy.
+
+For example, when doing 'df[col].method(value, inplace=True)', try using 'df.method({col: value}, inplace=True)' or df[col] = df[col].method(value) instead, to perform the operation inplace on the original object.
+
+
+  X[self.label].replace([np.inf, -np.inf], np.nan, inplace=True)
+Train Data Class Count: 4
+Using Feature Generators to preprocess the data ...
+Fitting AutoMLPipelineFeatureGenerator...
+	Available Memory:                    105574.24 MB
+	Train Data (Original)  Memory Usage: 332.73 MB (0.3% of available memory)
+	Inferring data type of each feature based on column values. Set feature_metadata_in to manually specify special dtypes of the features.
+	Stage 1 Generators:
+		Fitting AsTypeFeatureGenerator...
+	Stage 2 Generators:
+		Fitting FillNaFeatureGenerator...
+	Stage 3 Generators:
+		Fitting IdentityFeatureGenerator...
+	Stage 4 Generators:
+		Fitting DropUniqueFeatureGenerator...
+	Stage 5 Generators:
+		Fitting DropDuplicatesFeatureGenerator...
+	Types of features in original data (raw dtype, special dtypes):
+		('float', []) : 11177 | ['ViT_Embedding_Element_0', 'ViT_Embedding_Element_1', 'ViT_Embedding_Element_2', 'ViT_Embedding_Element_3', 'ViT_Embedding_Element_4', ...]
+		('int', [])   :   768 | ['HSV_0', 'HSV_1', 'HSV_2', 'HSV_3', 'HSV_4', ...]
+	Types of features in processed data (raw dtype, special dtypes):
+		('float', []) : 11177 | ['ViT_Embedding_Element_0', 'ViT_Embedding_Element_1', 'ViT_Embedding_Element_2', 'ViT_Embedding_Element_3', 'ViT_Embedding_Element_4', ...]
+		('int', [])   :   768 | ['HSV_0', 'HSV_1', 'HSV_2', 'HSV_3', 'HSV_4', ...]
+	118.8s = Fit runtime
+	11945 features in original data used to generate 11945 features in processed data.
+	Train Data (Processed) Memory Usage: 332.73 MB (0.3% of available memory)
+Data preprocessing and feature engineering runtime = 122.06s ...
+AutoGluon will gauge predictive performance using evaluation metric: 'accuracy'
+	To change this, specify the eval_metric parameter of Predictor()
+Automatically generating train/validation split with holdout_frac=0.1, Train Rows: 5402, Val Rows: 601
+User-specified model hyperparameters to be fit:
+{
+	'NN_TORCH': {},
+	'GBM': [{'extra_trees': True, 'ag_args': {'name_suffix': 'XT'}}, {}, 'GBMLarge'],
+	'CAT': {},
+	'XGB': {},
+	'FASTAI': {},
+	'RF': [{'criterion': 'gini', 'ag_args': {'name_suffix': 'Gini', 'problem_types': ['binary', 'multiclass']}}, {'criterion': 'entropy', 'ag_args': {'name_suffix': 'Entr', 'problem_types': ['binary', 'multiclass']}}, {'criterion': 'squared_error', 'ag_args': {'name_suffix': 'MSE', 'problem_types': ['regression', 'quantile']}}],
+	'XT': [{'criterion': 'gini', 'ag_args': {'name_suffix': 'Gini', 'problem_types': ['binary', 'multiclass']}}, {'criterion': 'entropy', 'ag_args': {'name_suffix': 'Entr', 'problem_types': ['binary', 'multiclass']}}, {'criterion': 'squared_error', 'ag_args': {'name_suffix': 'MSE', 'problem_types': ['regression', 'quantile']}}],
+	'KNN': [{'weights': 'uniform', 'ag_args': {'name_suffix': 'Unif'}}, {'weights': 'distance', 'ag_args': {'name_suffix': 'Dist'}}],
+}
+Fitting 13 L1 models ...
+Fitting model: KNeighborsUnif ...
+	0.3428	 = Validation score   (accuracy)
+	18.16s	 = Training   runtime
+	1.48s	 = Validation runtime
+Fitting model: KNeighborsDist ...
+	0.3511	 = Validation score   (accuracy)
+	7.8s	 = Training   runtime
+	1.4s	 = Validation runtime
+Fitting model: NeuralNetFastAI ...
+	0.8885	 = Validation score   (accuracy)
+	86.47s	 = Training   runtime
+	0.31s	 = Validation runtime
+Fitting model: LightGBMXT ...
+	0.9185	 = Validation score   (accuracy)
+	707.75s	 = Training   runtime
+	0.13s	 = Validation runtime
+Fitting model: LightGBM ...
+	0.9135	 = Validation score   (accuracy)
+	792.02s	 = Training   runtime
+	0.11s	 = Validation runtime
+Fitting model: RandomForestGini ...
+	0.8686	 = Validation score   (accuracy)
+	37.91s	 = Training   runtime
+	0.1s	 = Validation runtime
+Fitting model: RandomForestEntr ...
+	0.8719	 = Validation score   (accuracy)
+	36.36s	 = Training   runtime
+	0.11s	 = Validation runtime
+Fitting model: CatBoost ...
+TBB Warning: The number of workers is currently limited to 15. The request for 47 workers is ignored. Further requests for more workers will be silently ignored until the limit changes.
+
+	Many features detected (11945), dynamically setting 'colsample_bylevel' to 0.08371703641691085 to speed up training (Default = 1).
+	To disable this functionality, explicitly specify 'colsample_bylevel' in the model hyperparameters.
+	0.8952	 = Validation score   (accuracy)
+	191.68s	 = Training   runtime
+	0.18s	 = Validation runtime
+Fitting model: ExtraTreesGini ...
+	0.8636	 = Validation score   (accuracy)
+	15.05s	 = Training   runtime
+	0.11s	 = Validation runtime
+Fitting model: ExtraTreesEntr ...
+	0.8586	 = Validation score   (accuracy)
+	14.54s	 = Training   runtime
+	0.1s	 = Validation runtime
+Fitting model: XGBoost ...
+slurmstepd-shadowfax: error: *** JOB 432452 ON shadowfax CANCELLED AT 2024-04-07T11:05:09 ***

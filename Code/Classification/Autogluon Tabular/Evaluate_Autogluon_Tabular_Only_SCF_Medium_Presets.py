@@ -49,8 +49,10 @@ for col in test_df.columns:
 ##################################################################################################
 
 # Limit to numeric columns + 'Class'
-test_df_num_cols = test_df.select_dtypes(include=np.number).columns
-test_df = test_df[test_df_num_cols + ['Class']]
+test_df_num_cols = list(test_df.select_dtypes(include=np.number).columns)
+test_df_cols_to_keep = test_df_num_cols
+test_df_cols_to_keep.append('Class')
+test_df = test_df[test_df_cols_to_keep]
 
 # Print out column names
 print('column names')
