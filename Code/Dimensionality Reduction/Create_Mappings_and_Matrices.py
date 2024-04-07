@@ -46,9 +46,14 @@ def create_mappings_and_matrices():
     y_test = all_features_test['Class'].map(class_mapping)
 
     # Create Feature Matrices - Update This Code As More Features Are Added
-    feature_shorthand = ['HOG_16_ppc', 'HOG_24_ppc', 'HSV', 'LBP', 'VGG', 'ViT']
+    feature_shorthand = [#'HOG_16_ppc', # (eliminated for excessive dimensionality)
+                         'HOG_24_ppc', 
+                         'HSV', 
+                         'LBP', 
+                         'VGG', 
+                         'ViT']
     # Associated labels
-    feature_matrix_labels = ['HOG 16 PPC Features', 
+    feature_matrix_labels = [#'HOG 16 PPC Features', # (eliminated for excessive dimensionality)
                              'HOG 24 PPC Features', 
                              'HSV Features', 
                              'LBP Features',
