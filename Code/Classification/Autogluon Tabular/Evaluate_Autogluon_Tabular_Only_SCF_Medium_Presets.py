@@ -52,10 +52,10 @@ for col in test_df.columns:
 test_df_num_cols = list(test_df.select_dtypes(include=np.number).columns)
 test_df_cols_to_keep = test_df_num_cols
 test_df_cols_to_keep.append('Class')
-test_df = test_df[test_df_cols_to_keep]
+test_df = test_df[test_df_cols_to_keep].reset_index(drop=True)
 
 # Print out column names
-print('column names')
+print('column names after limiting')
 for col in test_df.columns:
     print(col)
 
@@ -63,6 +63,7 @@ for col in test_df.columns:
 
 # Load Model
 predictor = TabularPredictor.load('../../../Output/Classifier Fitting/Autogluon/Autogluon_Tabular_Only_SCF_Medium_Presets')
+print('loaded predictor')
 print(predictor)
 
 ##################################################################################################
@@ -71,6 +72,7 @@ print(predictor)
 
 # Convert from pandas to autogluon
 test_data = TabularDataset(test_df)
+print('converted from pandas')
 
 # Apply test
 predictions = predictor.predict(test_data)
@@ -79,9 +81,10 @@ test_data_string_cols = [col for col in test_data.columns if col not in test_df_
 test_data_string_cols_part = test_data[test_data_string_cols]
 # Use index values to line up
 predictions = pd.concat([test_data_string_cols_part, predictions], axis=1)
+print('concatenated predictions')
+print(predictions)
 # Save to Excel
 predictions.to_excel('../../../Data/Predictions/Autogluon/Autogluon_Tabular_Only_SCF_Medium_Presets_predictions.xlsx', index=False)
-print(predictions)
 
 ##################################################################################################
 
@@ -127,6 +130,22 @@ print(hyperparameters_df)
 # Feature Importance via Permutation
 
 # Feature importance
+print('checking test data')
+print(test_data)
+#print('cols list')
+#print(test_data.cols)
+print('duplicated indices')
+print(test_data.index.duplicated(keep=False))
+
+# Convert from pandas to autogluon
+print('resolving index issue i hope')
+test_df = test_df.reset_index(drop=True)
+print('col name check')
+for col in test_df.columns:
+    print(col)
+print('reconvert to autogluon')
+test_data = TabularDataset(test_df)
+
 fi = predictor.feature_importance(test_data)
 
 # Save to Excel

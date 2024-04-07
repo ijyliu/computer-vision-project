@@ -3,7 +3,7 @@
 #SBATCH --output=Evaluate_Autogluon_Tabular_Only_SCF_Medium_Presets.out
 #SBATCH --partition=jsteinhardt
 #SBATCH --ntasks=1
-#SBATCH --cpus-per-task=8
+#SBATCH --cpus-per-task=16
 
 # Timing
 # Reset the SECONDS variable

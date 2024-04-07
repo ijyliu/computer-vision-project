@@ -1,0 +1,4 @@
+Starting Job
+TBB Warning: The number of workers is currently limited to 15. The request for 47 workers is ignored. Further requests for more workers will be silently ignored until the limit changes.
+
+slurmstepd-shadowfax: error: *** JOB 433288 ON shadowfax CANCELLED AT 2024-04-07T14:07:30 ***
