@@ -41,9 +41,6 @@ training_data = combine_directory_parquets('../../../Data/Features/All Features/
 print('all training data')
 print(training_data)
 
-# Keep where 'Class' is in 'SUV', 'Pickup', 'Sedan', 'Convertible'
-training_data = training_data[training_data['Class'].isin(['SUV', 'Pickup', 'Sedan', 'Convertible'])]
-
 # If sample run, take a 1% sample of the data
 if sample_run:
     training_data = training_data.sample(frac=0.01)
