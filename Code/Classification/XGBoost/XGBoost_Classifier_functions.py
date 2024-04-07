@@ -47,11 +47,11 @@ def fit_xgboost_classifier(X_train, y_train, classifier_name):
 
     hyperparameter_settings = [
         {
-            'learning_rate': [0.1],
-            'n_estimators': [100],
-            'max_depth': [3],
-            'subsample': [1],
-            'colsample_bytree': [1],
+            'learning_rate': [0.01, 0.1, 0.3],
+            'n_estimators': [100, 200],
+            'max_depth': [3, 6],
+            'subsample': [0.8, 1],
+            'colsample_bytree': [0.8, 1]
         }
     ]
 
