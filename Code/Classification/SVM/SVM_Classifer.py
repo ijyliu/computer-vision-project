@@ -37,7 +37,7 @@ def prepare_matrices(data):
 
 ##################################################################################################
 
-def train_SVM(X_train, y_train, classifier_name):
+def fit_svm_classifier(X_train, y_train, classifier_name):
     '''
     Fits an SVM classifier to the training data matrices.
     '''
@@ -145,5 +145,11 @@ def make_predictions(test_data, X_test, classifier_name):
 
     limited_test_data.to_excel(predictions_dir + 'SVM_Classifier_Predictions_' + classifier_name + '.xlsx', index = False)
     ##################################################################################################
+
+# Sample usage:
+# training_data = combine_directory_parquets('path_to_training_data')
+# X_train, y_train = prepare_matrices(training_data)
+# fit_svm_classifier(X_train, y_train, 'SVM_Classifier')
+# For predictions, prepare test data similarly and use the make_predictions function
 
 
