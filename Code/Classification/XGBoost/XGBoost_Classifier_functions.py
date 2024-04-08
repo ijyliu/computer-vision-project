@@ -117,7 +117,7 @@ def make_predictions(test_data, X_test, classifier_name,label_encoder):
     if not os.path.exists(predictions_dir):
         os.makedirs(predictions_dir)
 
-    best_model = joblib.load(inference_dir + classifier_name + ' Best Model.joblib')
+    best_model = joblib.load(output_dir + classifier_name + ' Best Model.joblib')
 
     start_time = time.time()
 
