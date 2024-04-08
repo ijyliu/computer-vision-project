@@ -8,6 +8,7 @@ import sklearn
 import os
 from sklearn.linear_model import LogisticRegression
 from sklearn.model_selection import GridSearchCV
+from sklearn.inspection import permutation_importance
 import joblib
 import time
 import numpy as np

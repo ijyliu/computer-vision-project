@@ -3,7 +3,7 @@
 #SBATCH --output=PCA_Transformations.out
 #SBATCH --partition=jsteinhardt
 #SBATCH --ntasks=1
-#SBATCH --cpus-per-task=1
+#SBATCH --cpus-per-task=16
 
 # Timing
 # Reset the SECONDS variable
@@ -11,7 +11,8 @@ SECONDS=0
 
 echo "Starting Job"
 
-python PCA_Transformations.py
+# Execute the notebook
+jupyter nbconvert --to notebook --execute --inplace PCA_Transformations.ipynb
 
 echo "Completed Job"
 
