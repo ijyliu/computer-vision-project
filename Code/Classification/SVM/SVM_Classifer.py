@@ -10,11 +10,15 @@ from sklearn.metrics import accuracy_score
 from sklearn.model_selection import train_test_split
 
 # Prepare Training Data
-def collect_parquets(train_path):
-    parquet_files = glob.glob(f"{train_path}/*.parquet")
-    dfs = [pd.read_parquet(file) for file in parquet_files]
-    train_df = pd.concat(dfs, ignore_index = True)
-    return train_df
+def combine_directory_parquets(directory_path):
+    '''
+    Combines all parquet files in a directory into a single dataframe.
+    '''
+    if directory_path[-1] != '/':
+        directory_path += '/'
+    file_list = [f for f in os.listdir(directory_path) if f.endswith('.parquet')]
+    combined_df = pd.concat([pd.read_parquet(directory_path + f) for f in file_list])
+    return combined_df
 
 
 ##################################################################################################
@@ -151,5 +155,3 @@ def make_predictions(test_data, X_test, classifier_name):
 # X_train, y_train = prepare_matrices(training_data)
 # fit_svm_classifier(X_train, y_train, 'SVM_Classifier')
 # For predictions, prepare test data similarly and use the make_predictions function
-
-
