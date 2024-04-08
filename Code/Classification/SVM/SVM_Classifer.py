@@ -34,7 +34,7 @@ def prepare_matrices(data):
     y = data['Class']
 
     # Preprocess with standard scalar
-    scaler = sklearn.preprocessing.StandardScaler()
+    scaler = StandardScaler()
     X = scaler.fit_transform(X)
 
     return X, y
