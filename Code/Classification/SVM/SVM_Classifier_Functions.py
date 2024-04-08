@@ -71,7 +71,7 @@ def fit_svm_classifier(X_train, y_train, classifier_name):
     svm = SVC()
     
     # Setup GridSearchCV
-    gs = GridSearchCV(svm, param_grid, cv = hyperparameter_grid['k_folds'], scoring = 'accuracy', return_train_score = True)
+    gs = GridSearchCV(svm, param_grid, cv = hyperparameter_grid['k_folds'], scoring = 'accuracy', return_train_score = True, n_jobs = -1)
     
     # Fit the model
     gs.fit(X_train, y_train)
