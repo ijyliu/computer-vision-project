@@ -106,7 +106,7 @@ def fit_svm_classifier(X_train, y_train, classifier_name):
     print("Hyperparameters searched: ", hyperparameter_grid)
     print("Tuned hyperparameters: ", gs.best_params_)
 
-    joblib.dump(hyperparameter_settings, output_dir + classifier_name + ' Hyperparameter Settings.joblib')
+    joblib.dump(hyperparameter_grid, output_dir + classifier_name + ' Hyperparameter Settings.joblib')
     joblib.dump(gs.best_params_, output_dir + classifier_name + ' Tuned Hyperparameters.joblib')
     
     ##################################################################################################
