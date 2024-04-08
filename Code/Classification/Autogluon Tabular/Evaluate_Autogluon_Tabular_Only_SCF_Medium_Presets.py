@@ -50,13 +50,13 @@ for col in test_df.columns:
 
 # Limit to numeric columns + 'Class'
 test_df_num_cols = list(test_df.select_dtypes(include=np.number).columns)
-test_df_cols_to_keep = test_df_num_cols
+test_df_cols_to_keep = test_df_num_cols.copy()
 test_df_cols_to_keep.append('Class')
-test_df = test_df[test_df_cols_to_keep].reset_index(drop=True)
+test_df_for_prediction = test_df[test_df_cols_to_keep].reset_index(drop=True)
 
 # Print out column names
 print('column names after limiting')
-for col in test_df.columns:
+for col in test_df_for_prediction.columns:
     print(col)
 
 ##################################################################################################
@@ -71,16 +71,28 @@ print(predictor)
 # Make Predictions
 
 # Convert from pandas to autogluon
-test_data = TabularDataset(test_df)
+test_data = TabularDataset(test_df_for_prediction)
 print('converted from pandas')
 
 # Apply test
 predictions = predictor.predict(test_data)
-# Concatenate with test data string columns
-test_data_string_cols = [col for col in test_data.columns if col not in test_df_num_cols]
-test_data_string_cols_part = test_data[test_data_string_cols]
+# Concatenate with test df string columns
+print('test df num cols')
+print(test_df_num_cols)
+test_df_string_cols = [col for col in test_df.columns if col not in test_df_num_cols]
+print('test df string cols')
+print(test_df_string_cols)
+test_df_string_cols_part = test_df[test_df_string_cols]
+#test_df_string_cols_part['Autogluon_Tabular_Best_Model_Prediction'] = predictions
 # Use index values to line up
-predictions = pd.concat([test_data_string_cols_part, predictions], axis=1)
+print('predictions')
+print(predictions)
+print('predictions length')
+print(len(predictions))
+print('predictions type')
+print(type(predictions))
+#predictions = pd.concat([test_df_string_cols_part, predictions], axis=1)
+predictions = pd.concat([test_df_string_cols_part, predictions.to_frame().T], ignore_index=True)
 print('concatenated predictions')
 print(predictions)
 # Save to Excel
@@ -131,7 +143,7 @@ print(hyperparameters_df)
 fi = predictor.feature_importance(test_data)
 
 # Save to Excel
-fi.to_excel('../../../Output/Classifier Evaluation/Autogluon/Autogluon_Tabular_Only_SCF_Medium_Presets_feature_importance.xlsx', index=False)
+fi.to_excel('../../../Output/Classifier Evaluation/Autogluon/Autogluon_Tabular_Only_SCF_Medium_Presets_feature_importance.xlsx')
 
 # Print entire df
 pd.set_option('display.max_rows', None)
