@@ -65,3 +65,5 @@ import numpy as np
 np.random.seed(222)
 # Run predictor
 predictor = TabularPredictor(label='Class', path='../../../Output/Classifier Fitting/Autogluon/Autogluon_Tabular_Only_SCF_Medium_Presets').fit(train_data=train_data, presets='medium_quality', excluded_model_types = ['KNN']) # exclude KNN as it's bad and takes up a ton of space
+# Save space
+predictor.save_space()
