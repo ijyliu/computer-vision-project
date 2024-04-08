@@ -35,7 +35,7 @@ def prepare_matrices(data):
     label_encoder = LabelEncoder()
     y_encoded = label_encoder.fit_transform(y)
 
-    return X, y_encoded
+    return X, y_encoded,label_encoder
 
 def fit_xgboost_classifier(X_train, y_train, classifier_name):
     '''
@@ -88,7 +88,7 @@ def fit_xgboost_classifier(X_train, y_train, classifier_name):
     joblib.dump(hyperparameter_settings, output_dir + classifier_name + ' Hyperparameter Settings.joblib')
     joblib.dump(gs.best_params_, output_dir + classifier_name + ' Tuned Hyperparameters.joblib')
 
-def make_predictions(test_data, X_test, classifier_name):
+def make_predictions(test_data, X_test, classifier_name,label_encoder):
     '''
     Makes predictions on the test data using the best XGBoost model.
     '''
@@ -105,8 +105,10 @@ def make_predictions(test_data, X_test, classifier_name):
     start_time = time.time()
 
     predictions = best_model.predict(X_test)
+    
 
     end_time = time.time()
+    original_labels = label_encoder.inverse_transform(predictions)
 
     runtime_minutes = (end_time - start_time) / 60
     print("Prediction time in minutes: ", runtime_minutes)
@@ -120,7 +122,7 @@ def make_predictions(test_data, X_test, classifier_name):
 
     prediction_statistics_df.to_excel(inference_dir + classifier_name + ' Prediction Statistics.xlsx', index=False)
 
-    test_data['XGBoost_Classification'] = predictions
+    test_data['XGBoost_Classification'] = original_labels
 
     limited_test_data = test_data[[col for col in test_data.columns if col not in test_data.select_dtypes(include=np.number).columns]]
 

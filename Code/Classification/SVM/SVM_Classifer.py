@@ -7,14 +7,18 @@ import time
 from sklearn.svm import SVC
 from sklearn.model_selection import GridSearchCV
 from sklearn.metrics import accuracy_score
-from sklearn.model_selection import train_test_split
+from sklearn.preprocessing import LabelEncoder, StandardScaler
 
 # Prepare Training Data
-def collect_parquets(train_path):
-    parquet_files = glob.glob(f"{train_path}/*.parquet")
-    dfs = [pd.read_parquet(file) for file in parquet_files]
-    train_df = pd.concat(dfs, ignore_index = True)
-    return train_df
+def combine_directory_parquets(directory_path):
+    '''
+    Combines all parquet files in a directory into a single dataframe.
+    '''
+    if directory_path[-1] != '/':
+        directory_path += '/'
+    file_list = [f for f in os.listdir(directory_path) if f.endswith('.parquet')]
+    combined_df = pd.concat([pd.read_parquet(directory_path + f) for f in file_list])
+    return combined_df
 
 
 ##################################################################################################
@@ -30,14 +34,14 @@ def prepare_matrices(data):
     y = data['Class']
 
     # Preprocess with standard scalar
-    scaler = sklearn.preprocessing.StandardScaler()
+    scaler = StandardScaler()
     X = scaler.fit_transform(X)
 
     return X, y
 
 ##################################################################################################
 
-def train_SVM(X_train, y_train, classifier_name):
+def fit_svm_classifier(X_train, y_train, classifier_name):
     '''
     Fits an SVM classifier to the training data matrices.
     '''
@@ -76,11 +80,7 @@ def train_SVM(X_train, y_train, classifier_name):
     fit_time = time.time() - start_time
     
     # Best model
-    best_model = grid_search.best_estimator_
-    
-    # Predictions
-    train_preds = best_model.predict(X_train)
-    val_preds = best_model.predict(X_val)
+    best_model = gs.best_estimator_
     
     # Save the model
     joblib.dump(best_model, output_dir + classifier_name + ' Best Model.joblib')
@@ -89,9 +89,9 @@ def train_SVM(X_train, y_train, classifier_name):
     print("Training time in minutes: ", runtime_minutes)
     runtime_per_image = runtime_minutes / len(y_train)
     print("Training time per image in minutes: ", runtime_per_image)
-    train_accuracy_best_model = accuracy_score(y_train, train_preds)
+    train_accuracy_best_model = gs.best_estimator_.score(X_train, y_train)
     print("Train accuracy of best model: ", train_accuracy_best_model)
-    mean_cross_validated_accuracy = accuracy_score(y_val, val_preds)
+    mean_cross_validated_accuracy = gs.best_score_
     print("Mean cross validated accuracy of best model: ", mean_cross_validated_accuracy)
 
     training_statistics_df = pd.DataFrame({
@@ -106,7 +106,7 @@ def train_SVM(X_train, y_train, classifier_name):
     print("Hyperparameters searched: ", hyperparameter_grid)
     print("Tuned hyperparameters: ", gs.best_params_)
 
-    joblib.dump(hyperparameter_settings, output_dir + classifier_name + ' Hyperparameter Settings.joblib')
+    joblib.dump(hyperparameter_grid, output_dir + classifier_name + ' Hyperparameter Settings.joblib')
     joblib.dump(gs.best_params_, output_dir + classifier_name + ' Tuned Hyperparameters.joblib')
     
     ##################################################################################################
@@ -150,4 +150,8 @@ def make_predictions(test_data, X_test, classifier_name):
     limited_test_data.to_excel(predictions_dir + 'SVM_Classifier_Predictions_' + classifier_name + '.xlsx', index = False)
     ##################################################################################################
 
-
+# Sample usage:
+# training_data = combine_directory_parquets('path_to_training_data')
+# X_train, y_train = prepare_matrices(training_data)
+# fit_svm_classifier(X_train, y_train, 'SVM_Classifier')
+# For predictions, prepare test data similarly and use the make_predictions function
