@@ -78,10 +78,6 @@ def train_SVM(X_train, y_train, classifier_name):
     # Best model
     best_model = grid_search.best_estimator_
     
-    # Predictions
-    train_preds = best_model.predict(X_train)
-    val_preds = best_model.predict(X_val)
-    
     # Save the model
     joblib.dump(best_model, output_dir + classifier_name + ' Best Model.joblib')
 
@@ -89,9 +85,9 @@ def train_SVM(X_train, y_train, classifier_name):
     print("Training time in minutes: ", runtime_minutes)
     runtime_per_image = runtime_minutes / len(y_train)
     print("Training time per image in minutes: ", runtime_per_image)
-    train_accuracy_best_model = accuracy_score(y_train, train_preds)
+    train_accuracy_best_model = gs.best_estimator_.score(X_train, y_train)
     print("Train accuracy of best model: ", train_accuracy_best_model)
-    mean_cross_validated_accuracy = accuracy_score(y_val, val_preds)
+    mean_cross_validated_accuracy = gs.best_score_
     print("Mean cross validated accuracy of best model: ", mean_cross_validated_accuracy)
 
     training_statistics_df = pd.DataFrame({
