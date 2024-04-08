@@ -19,7 +19,27 @@ def collect_parquets(train_path):
 
 ##################################################################################################
 
-def fit_SVM_classifier(X_train, y_train, classifier_name):
+def prepare_matrices(data):
+    '''
+    Takes in a dataframe, preprocesses it, and returns X and y matrices.
+    '''
+    num_cols = data.select_dtypes(include=np.number).columns
+    X = data[num_cols]
+    y = data['Class']
+
+    # Optionally skip scaling if preferred for XGBoost
+    scaler = StandardScaler()
+    X = scaler.fit_transform(X)
+
+    # Encode class labels to integers
+    label_encoder = LabelEncoder()
+    y_encoded = label_encoder.fit_transform(y)
+
+    return X, y_encoded
+
+##################################################################################################
+
+def train_SVM(X_train, y_train, classifier_name):
     '''
     Fits an SVM classifier to the training data matrices.
     '''
