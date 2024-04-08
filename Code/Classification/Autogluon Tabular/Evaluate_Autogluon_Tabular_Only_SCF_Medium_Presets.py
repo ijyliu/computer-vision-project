@@ -128,24 +128,6 @@ print(hyperparameters_df)
 ##################################################################################################
 
 # Feature Importance via Permutation
-
-# Feature importance
-print('checking test data')
-print(test_data)
-#print('cols list')
-#print(test_data.cols)
-print('duplicated indices')
-print(test_data.index.duplicated(keep=False))
-
-# Convert from pandas to autogluon
-print('resolving index issue i hope')
-test_df = test_df.reset_index(drop=True)
-print('col name check')
-for col in test_df.columns:
-    print(col)
-print('reconvert to autogluon')
-test_data = TabularDataset(test_df)
-
 fi = predictor.feature_importance(test_data)
 
 # Save to Excel
