@@ -19,7 +19,7 @@ def collect_parquets(train_path):
 
 ##################################################################################################
 
-def train_SVM(X_train, y_train, classifier_name):
+def fit_SVM_classifier(X_train, y_train, classifier_name):
     '''
     Fits an SVM classifier to the training data matrices.
     '''
