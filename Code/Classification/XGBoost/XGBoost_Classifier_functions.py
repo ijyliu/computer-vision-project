@@ -34,8 +34,11 @@ def prepare_matrices(data):
     # Encode class labels to integers
     label_encoder = LabelEncoder()
     y_encoded = label_encoder.fit_transform(y)
+    
+    scaler = StandardScaler()
+    X = scaler.fit_transform(X)
 
-    return X, y_encoded,label_encoder
+    return X, y_encoded,label_encoder,scaler
 
 def fit_xgboost_classifier(X_train, y_train, classifier_name):
     '''
@@ -45,26 +48,36 @@ def fit_xgboost_classifier(X_train, y_train, classifier_name):
     if not os.path.exists(output_dir):
         os.makedirs(output_dir)
 
-    hyperparameter_settings = [
-        {
+    hyperparameter_grid =  {
+            'n_estimators': [100, 200,300],
             'learning_rate': [0.01, 0.1, 0.3],
-            'n_estimators': [100, 200],
-            'max_depth': [3, 6],
-            'subsample': [0.8, 1],
-            'colsample_bytree': [0.8, 1]
+            'max_depth': [3, 5, 7],
+            'min_child_weight': [1,3,5],
+            'k_folds': 5,
         }
-    ]
+    
+    param_grid = {
+        'n_estimators': hyperparameter_grid['n_estimators'],
+        'learning_rate': hyperparameter_grid['learning_rate'],
+        'max_depth': hyperparameter_grid['max_depth'],
+        'min_child_weight': hyperparameter_grid['min_child_weight']
+    }
 
     start_time = time.time()
 
-    xgb_clf = XGBClassifier(use_label_encoder=False, eval_metric='mlogloss')
-    gs = GridSearchCV(xgb_clf, hyperparameter_settings, scoring='accuracy', cv=5, n_jobs=-1).fit(X_train, y_train)
-
-    end_time = time.time()
-
-    joblib.dump(gs.best_estimator_, output_dir + classifier_name + ' Best Model.joblib')
-
-    runtime_minutes = (end_time - start_time) / 60
+    xgb_clf = XGBClassifier(use_label_encoder=False, eval_metric='logloss')
+    gs = GridSearchCV(xgb_clf, param_grid, cv=hyperparameter_grid['k_folds'], scoring='accuracy', return_train_score=True, n_jobs=-1)
+    
+    gs.fit(X_train, y_train)
+    
+    fit_time = time.time() - start_time
+    
+    best_model = gs.best_estimator_
+    
+    joblib.dump(best_model, output_dir + classifier_name + ' Best Model.joblib')
+    
+    
+    runtime_minutes = fit_time / 60
     print("Training time in minutes: ", runtime_minutes)
     runtime_per_image = runtime_minutes / len(y_train)
     print("Training time per image in minutes: ", runtime_per_image)
@@ -72,26 +85,30 @@ def fit_xgboost_classifier(X_train, y_train, classifier_name):
     print("Train accuracy of best model: ", train_accuracy_best_model)
     mean_cross_validated_accuracy = gs.best_score_
     print("Mean cross validated accuracy of best model: ", mean_cross_validated_accuracy)
-
+    
+    
     training_statistics_df = pd.DataFrame({
         'runtime_minutes': [runtime_minutes],
         'runtime_per_image': [runtime_per_image],
         'train_accuracy_best_model': [train_accuracy_best_model],
         'mean_cross_validated_accuracy': [mean_cross_validated_accuracy]
     })
-
+    
+    
     training_statistics_df.to_excel(output_dir + classifier_name + ' Training Statistics.xlsx')
 
-    print("Hyperparameters searched: ", hyperparameter_settings)
+    print("Hyperparameters searched: ", hyperparameter_grid)
     print("Tuned hyperparameters: ", gs.best_params_)
 
-    joblib.dump(hyperparameter_settings, output_dir + classifier_name + ' Hyperparameter Settings.joblib')
+    joblib.dump(hyperparameter_grid, output_dir + classifier_name + ' Hyperparameter Settings.joblib')
     joblib.dump(gs.best_params_, output_dir + classifier_name + ' Tuned Hyperparameters.joblib')
 
+  
 def make_predictions(test_data, X_test, classifier_name,label_encoder):
     '''
     Makes predictions on the test data using the best XGBoost model.
     '''
+    output_dir = '../../../Output/Classifier Fitting/XGBoost/'
     inference_dir = '../../../Output/Classifier Inference/XGBoost/'
     predictions_dir = '../../../Data/Predictions/XGBoost/'
 
@@ -104,11 +121,11 @@ def make_predictions(test_data, X_test, classifier_name,label_encoder):
 
     start_time = time.time()
 
-    predictions = best_model.predict(X_test)
+    predictions_encoded = best_model.predict(X_test)
+    predictions = label_encoder.inverse_transform(predictions_encoded)
     
 
     end_time = time.time()
-    original_labels = label_encoder.inverse_transform(predictions)
 
     runtime_minutes = (end_time - start_time) / 60
     print("Prediction time in minutes: ", runtime_minutes)
@@ -122,7 +139,7 @@ def make_predictions(test_data, X_test, classifier_name,label_encoder):
 
     prediction_statistics_df.to_excel(inference_dir + classifier_name + ' Prediction Statistics.xlsx', index=False)
 
-    test_data['XGBoost_Classification'] = original_labels
+    test_data['XGBoost_Classification'] = predictions
 
     limited_test_data = test_data[[col for col in test_data.columns if col not in test_data.select_dtypes(include=np.number).columns]]
 
