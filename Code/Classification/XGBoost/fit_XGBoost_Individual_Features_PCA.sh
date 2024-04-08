@@ -1,7 +1,7 @@
 #!/bin/bash
 #SBATCH --job-name=fit_XGBoost_Individual_Features_PCA
 #SBATCH --output=fit_XGBoost_Individual_Features_PCA.out
-#SBATCH --partition=epurdom
+#SBATCH --partition=jsteinhardt
 #SBATCH --ntasks=1
 #SBATCH --cpus-per-task=16
 
