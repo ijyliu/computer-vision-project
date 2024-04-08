@@ -80,7 +80,7 @@ def fit_svm_classifier(X_train, y_train, classifier_name):
     fit_time = time.time() - start_time
     
     # Best model
-    best_model = grid_search.best_estimator_
+    best_model = gs.best_estimator_
     
     # Save the model
     joblib.dump(best_model, output_dir + classifier_name + ' Best Model.joblib')
