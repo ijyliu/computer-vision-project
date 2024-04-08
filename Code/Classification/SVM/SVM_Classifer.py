@@ -21,21 +21,19 @@ def collect_parquets(train_path):
 
 def prepare_matrices(data):
     '''
-    Takes in a dataframe, preprocesses it, and returns X and y matrices.
+    Takes in a dataframe and returns X and y matrices.
     '''
+    # Create matrices for training
+    # X is all numeric columns, y is 'Class'
     num_cols = data.select_dtypes(include=np.number).columns
     X = data[num_cols]
     y = data['Class']
 
-    # Optionally skip scaling if preferred for XGBoost
-    scaler = StandardScaler()
+    # Preprocess with standard scalar
+    scaler = sklearn.preprocessing.StandardScaler()
     X = scaler.fit_transform(X)
 
-    # Encode class labels to integers
-    label_encoder = LabelEncoder()
-    y_encoded = label_encoder.fit_transform(y)
-
-    return X, y_encoded
+    return X, y
 
 ##################################################################################################
 
