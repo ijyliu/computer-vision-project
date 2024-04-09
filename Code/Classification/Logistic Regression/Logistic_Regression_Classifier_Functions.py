@@ -153,12 +153,17 @@ def make_predictions(test_data, X_test, classifier_name):
     })
     # Output to Excel
     prediction_statistics_df.to_excel('../../../Output/Classifier Inference/Logistic Regression/' + classifier_name + ' Prediction Statistics.xlsx', index=False)
-
-    # Add to test_data
-    test_data['Logistic_Regression_Classification'] = predictions
+    print('saved prediction statistics')
 
     # Keep only string items in test_data
-    limited_test_data = test_data[[col for col in test_data.columns if col not in test_data.select_dtypes(include=np.number).columns]]
+    limited_test_data = test_data.copy()
+    #limited_test_data = limited_test_data[[col for col in limited_test_data.columns if col not in limited_test_data.select_dtypes(include=np.number).columns]]
+    limited_test_data = limited_test_data[['Class', 'harmonized_filename', 'image_path_blur', 'image_path_no_blur']]
+    print('limited cols in test data')
+
+    # Add to test_data
+    limited_test_data['Logistic_Regression_Classification'] = predictions
+    print('added to test data')
 
     # Save to excel
     limited_test_data.to_excel('../../../Data/Predictions/Logistic Regression/Logistic_Regression_Classifier_Predictions_' + classifier_name + '.xlsx', index=False)
