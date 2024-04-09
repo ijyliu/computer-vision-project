@@ -83,7 +83,7 @@ def fit_svm_classifier(X_train, y_train, classifier_name):
     best_model = gs.best_estimator_
     
     # Save the model
-    joblib.dump(best_model, output_dir + classifier_name + ' Best Model.joblib')
+    joblib.dump(best_model, output_dir + classifier_name + ' Best Model.joblib', compress=True)
 
     runtime_minutes = fit_time / 60
     print("Training time in minutes: ", runtime_minutes)

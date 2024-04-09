@@ -85,7 +85,7 @@ def fit_logistic_regression_classifier(X_train, y_train, classifier_name):
     end_time = time.time()
 
     # Dump the best model to a file
-    joblib.dump(gs.best_estimator_, '../../../Output/Classifier Fitting/Logistic Regression/' + classifier_name + ' Best Model.joblib')
+    joblib.dump(gs.best_estimator_, '../../../Output/Classifier Fitting/Logistic Regression/' + classifier_name + ' Best Model.joblib', compress=True)
 
     # Statistics
     runtime_minutes = (end_time - start_time) / 60
