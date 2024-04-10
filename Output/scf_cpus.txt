@@ -1,6 +1,8 @@
 command:
 srun -p jsteinhardt -c 1 --nodelist balrog --pty bash
 
+we can look up benchmarks on cpumark website
+
 jsteinhardt
 shadowfax
 model name      : Intel(R) Xeon(R) Silver 4214 CPU @ 2.20GHz
