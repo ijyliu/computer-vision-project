@@ -1,0 +1,16 @@
+command:
+srun -p jsteinhardt -c 1 --nodelist balrog --pty bash
+
+jsteinhardt
+shadowfax
+model name      : Intel(R) Xeon(R) Silver 4214 CPU @ 2.20GHz
+balrog
+model name      : Intel(R) Xeon(R) Gold 5220R CPU @ 2.20GHz
+saruman
+model name      : Intel(R) Xeon(R) Gold 5320 CPU @ 2.20GHz
+sunstone, smokyquartz, rainbowquartz
+model name      : Intel(R) Xeon(R) Gold 5218 CPU @ 2.30GHz
+
+epurdom
+frodo
+model name      : AMD EPYC 7543 32-Core Processor
