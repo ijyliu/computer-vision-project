@@ -54,15 +54,13 @@ def fit_random_forest_classifier(X_train, y_train, classifier_name):
     if not os.path.exists('../../../Output/Classifier Fitting/Random Forest/'):
         os.makedirs('../../../Output/Classifier Fitting/Random Forest/')
 
-
     # Hyperparameter Settings
     hyperparameter_settings = {
-        'n_estimators': [100, 500, 1000],  # Number of trees in random forest
+        'n_estimators': [500, 1000, 1500],  # Number of trees in random forest
         'max_features': ['sqrt'],  # Number of features to consider at every split
-        'max_depth': [10, 20, 30, 40, 50, 60],  # Maximum number of levels in tree
-        'min_samples_split': [5, 10],  # Minimum number of samples required to split a node
-        'min_samples_leaf': [2, 4],  # Minimum number of samples required at each leaf node
-        'bootstrap': [True, False]  # Method of selecting samples for training each tree
+        'max_depth': [20, 40, 60, 80],  # Maximum number of levels in tree
+        'bootstrap': [True, False],  # Method of selecting samples for training each tree
+        'min_samples_leaf': [1, 2]  # Minimum number of samples required to be at a leaf node
     }
 
     print('hyperparameter settings')
