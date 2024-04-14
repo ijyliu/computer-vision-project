@@ -49,10 +49,10 @@ def fit_xgboost_classifier(X_train, y_train, classifier_name):
         os.makedirs(output_dir)
 
     hyperparameter_grid =  {
-            'n_estimators': [100, 200,300],
-            'learning_rate': [0.01, 0.1, 0.3],
-            'max_depth': [3, 5, 7],
-            'min_child_weight': [1,3,5],
+            'n_estimators': [100, 200, 300],
+            'learning_rate': [0.1, 0.3, 0.5],
+            'max_depth': [2, 3, 5],
+            'min_child_weight': [1, 3, 5],
             'k_folds': 5,
     }         
     
