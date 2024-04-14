@@ -50,11 +50,11 @@ def fit_svm_classifier(X_train, y_train, classifier_name):
         os.makedirs(output_dir)
 
     hyperparameter_grid = {
-    'c_values' :  np.logspace(-1, 2, num = 4),
-    'kernel_grid' :  ['rbf', 'poly'],
-    'gamma_grid' :  np.logspace(-1, 2, num = 4),
-    'degree_grid':  [2, 3, 5, 7],
-    'k_folds' : 5
+        'c_values' :  [0.001, 0.01, 0.1, 1],
+        'kernel_grid' :  ['rbf', 'poly'],
+        'gamma_grid' :  [0.001, 0.01, 0.1, 1],
+        'degree_grid':  [2, 4],
+        'k_folds' : 5
     }
     
     # Setup the hyperparameter grid
