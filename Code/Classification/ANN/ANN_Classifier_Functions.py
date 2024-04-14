@@ -12,7 +12,7 @@ from tensorflow.keras.optimizers import Adam, RMSprop, SGD
 from tensorflow.keras.wrappers.scikit_learn import KerasClassifier
 from tensorflow.keras.models import load_model
 from sklearn.model_selection import GridSearchCV
-
+from sklearn.preprocessing import StandardScaler, LabelEncoder
 
 ##################################################################################################
 
@@ -86,6 +86,9 @@ def fit_ann_classifier(X_train, y_train, classifier_name):
 
     # Create a KerasClassifier object
     model = KerasClassifier(build_fn = build_model, verbose = 0)
+
+    # Print device
+    print("Device: ", model.device)
 
     # Setup GridSearchCV
     param_grid = {
