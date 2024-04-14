@@ -58,7 +58,7 @@ def fit_random_forest_classifier(X_train, y_train, classifier_name):
     # Hyperparameter Settings
     hyperparameter_settings = {
         'n_estimators': [100, 500, 1000],  # Number of trees in random forest
-        'max_features': ['auto', 'sqrt'],  # Number of features to consider at every split
+        'max_features': ['sqrt'],  # Number of features to consider at every split
         'max_depth': [10, 20, 30, 40, 50, 60],  # Maximum number of levels in tree
         'min_samples_split': [5, 10],  # Minimum number of samples required to split a node
         'min_samples_leaf': [2, 4],  # Minimum number of samples required at each leaf node
