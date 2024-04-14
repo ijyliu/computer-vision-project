@@ -4,3 +4,4 @@ Starting Job
 0.00s - make the debugger miss breakpoints. Please pass -Xfrozen_modules=off
 0.00s - to python to disable frozen modules.
 0.00s - Note: Debugging will proceed. Set PYDEVD_DISABLE_FILE_VALIDATION=1 to disable this validation.
+slurmstepd-sunstone: error: *** JOB 435810 ON sunstone CANCELLED AT 2024-04-14T09:58:59 ***

@@ -1,7 +1,7 @@
 #!/bin/bash
 #SBATCH --job-name=Fit_SVM_Classifier_All_Features_PCA
 #SBATCH --output=Fit_SVM_Classifier_All_Features_PCA.out
-#SBATCH --partition=jsteinhardt
+#SBATCH --partition=epurdom
 #SBATCH --ntasks=1
 #SBATCH --cpus-per-task=16
 

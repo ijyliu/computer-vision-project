@@ -1,7 +1,7 @@
 #!/bin/bash
 #SBATCH --job-name=Fit_Logistic_Regression_Classifier_All_Data
 #SBATCH --output=Fit_Logistic_Regression_Classifier_All_Data.out
-#SBATCH --partition=jsteinhardt
+#SBATCH --partition=epurdom
 #SBATCH --ntasks=1
 #SBATCH --cpus-per-task=16
 
