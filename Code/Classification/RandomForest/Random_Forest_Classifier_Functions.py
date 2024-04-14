@@ -7,7 +7,7 @@ import pandas as pd
 import sklearn
 import os
 from sklearn.ensemble import RandomForestClassifier
-from sklearn.model_selection import RandomizedSearchCV
+from sklearn.model_selection import GridSearchCV
 from scipy.stats import randint
 import joblib
 import time
@@ -74,22 +74,22 @@ def fit_random_forest_classifier(X_train, y_train, classifier_name):
     # Fit model
     # Perform grid search with 5 fold cross validation
     rf = RandomForestClassifier()
-    rs = RandomizedSearchCV(rf, hyperparameter_settings, n_iter=100, scoring='accuracy', cv=5, n_jobs=-1).fit(X_train, y_train)
+    gs = GridSearchCV(rf, hyperparameter_settings, scoring='accuracy', cv=5, n_jobs=-1).fit(X_train, y_train)
 
     # End timer
     end_time = time.time()
 
     # Dump the best model to a file
-    joblib.dump(rs.best_estimator_, '../../../Output/Classifier Fitting/Random Forest/' + classifier_name + ' Best Model.joblib', compress=True)
+    joblib.dump(gs.best_estimator_, '../../../Output/Classifier Fitting/Random Forest/' + classifier_name + ' Best Model.joblib', compress=True)
 
     # Statistics
     runtime_minutes = (end_time - start_time) / 60
     print("training time in minutes: ", runtime_minutes)
     runtime_per_image = runtime_minutes / len(y_train)
     print("training time per image in minutes: ", runtime_per_image)
-    train_accuracy_best_model = rs.best_estimator_.score(X_train, y_train)
+    train_accuracy_best_model = gs.best_estimator_.score(X_train, y_train)
     print("train accuracy of best model: ", train_accuracy_best_model)
-    mean_cross_validated_accuracy = rs.best_score_
+    mean_cross_validated_accuracy = gs.best_score_
     print("mean cross validated accuracy of best model: ", mean_cross_validated_accuracy)
     # Create dataframe
     training_statistics_df = pd.DataFrame({
@@ -104,7 +104,7 @@ def fit_random_forest_classifier(X_train, y_train, classifier_name):
 
     # Hyperparameters
     print("hyperparameters searched: ", hyperparameter_settings)
-    tuned_hyperparameters = rs.best_params_
+    tuned_hyperparameters = gs.best_params_
     print("tuned hyperparameters: ", tuned_hyperparameters)
     # Output dictionaries
     joblib.dump(hyperparameter_settings, '../../../Output/Classifier Fitting/Random Forest/' + classifier_name + ' Hyperparameter Settings.joblib')
