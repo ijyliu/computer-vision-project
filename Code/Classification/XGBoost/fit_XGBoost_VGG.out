@@ -1,0 +1,94 @@
+Starting Job
+[NbConvertApp] Converting notebook fit_XGBoost_VGG.ipynb to notebook
+0.00s - Debugger warning: It seems that frozen modules are being used, which may
+0.00s - make the debugger miss breakpoints. Please pass -Xfrozen_modules=off
+0.00s - to python to disable frozen modules.
+0.00s - Note: Debugging will proceed. Set PYDEVD_DISABLE_FILE_VALIDATION=1 to disable this validation.
+Traceback (most recent call last):
+  File "/scratch/users/ijyliu/conda/envs/scf_general/bin/jupyter-nbconvert", line 10, in <module>
+    sys.exit(main())
+             ^^^^^^
+  File "/scratch/users/ijyliu/conda/envs/scf_general/lib/python3.11/site-packages/jupyter_core/application.py", line 283, in launch_instance
+    super().launch_instance(argv=argv, **kwargs)
+  File "/scratch/users/ijyliu/conda/envs/scf_general/lib/python3.11/site-packages/traitlets/config/application.py", line 1075, in launch_instance
+    app.start()
+  File "/scratch/users/ijyliu/conda/envs/scf_general/lib/python3.11/site-packages/nbconvert/nbconvertapp.py", line 420, in start
+    self.convert_notebooks()
+  File "/scratch/users/ijyliu/conda/envs/scf_general/lib/python3.11/site-packages/nbconvert/nbconvertapp.py", line 597, in convert_notebooks
+    self.convert_single_notebook(notebook_filename)
+  File "/scratch/users/ijyliu/conda/envs/scf_general/lib/python3.11/site-packages/nbconvert/nbconvertapp.py", line 563, in convert_single_notebook
+    output, resources = self.export_single_notebook(
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/scratch/users/ijyliu/conda/envs/scf_general/lib/python3.11/site-packages/nbconvert/nbconvertapp.py", line 487, in export_single_notebook
+    output, resources = self.exporter.from_filename(
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/scratch/users/ijyliu/conda/envs/scf_general/lib/python3.11/site-packages/nbconvert/exporters/exporter.py", line 201, in from_filename
+    return self.from_file(f, resources=resources, **kw)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/scratch/users/ijyliu/conda/envs/scf_general/lib/python3.11/site-packages/nbconvert/exporters/exporter.py", line 220, in from_file
+    return self.from_notebook_node(
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/scratch/users/ijyliu/conda/envs/scf_general/lib/python3.11/site-packages/nbconvert/exporters/notebook.py", line 36, in from_notebook_node
+    nb_copy, resources = super().from_notebook_node(nb, resources, **kw)
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/scratch/users/ijyliu/conda/envs/scf_general/lib/python3.11/site-packages/nbconvert/exporters/exporter.py", line 154, in from_notebook_node
+    nb_copy, resources = self._preprocess(nb_copy, resources)
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/scratch/users/ijyliu/conda/envs/scf_general/lib/python3.11/site-packages/nbconvert/exporters/exporter.py", line 353, in _preprocess
+    nbc, resc = preprocessor(nbc, resc)
+                ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/scratch/users/ijyliu/conda/envs/scf_general/lib/python3.11/site-packages/nbconvert/preprocessors/base.py", line 48, in __call__
+    return self.preprocess(nb, resources)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/scratch/users/ijyliu/conda/envs/scf_general/lib/python3.11/site-packages/nbconvert/preprocessors/execute.py", line 102, in preprocess
+    self.preprocess_cell(cell, resources, index)
+  File "/scratch/users/ijyliu/conda/envs/scf_general/lib/python3.11/site-packages/nbconvert/preprocessors/execute.py", line 123, in preprocess_cell
+    cell = self.execute_cell(cell, index, store_history=True)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/scratch/users/ijyliu/conda/envs/scf_general/lib/python3.11/site-packages/jupyter_core/utils/__init__.py", line 165, in wrapped
+    return loop.run_until_complete(inner)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/scratch/users/ijyliu/conda/envs/scf_general/lib/python3.11/asyncio/base_events.py", line 654, in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+  File "/scratch/users/ijyliu/conda/envs/scf_general/lib/python3.11/site-packages/nbclient/client.py", line 1062, in async_execute_cell
+    await self._check_raise_for_error(cell, cell_index, exec_reply)
+  File "/scratch/users/ijyliu/conda/envs/scf_general/lib/python3.11/site-packages/nbclient/client.py", line 918, in _check_raise_for_error
+    raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
+nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
+------------------
+fit_xgboost_classifier(X_train, y_train, classifier_name)
+------------------
+
+
+[0;31m---------------------------------------------------------------------------[0m
+[0;31mKeyError[0m                                  Traceback (most recent call last)
+Cell [0;32mIn[6], line 1[0m
+[0;32m----> 1[0m [43mfit_xgboost_classifier[49m[43m([49m[43mX_train[49m[43m,[49m[43m [49m[43my_train[49m[43m,[49m[43m [49m[43mclassifier_name[49m[43m)[49m
+
+File [0;32m~/repo/computer-vision-project/Code/Classification/XGBoost/XGBoost_Classifier_functions.py:72[0m, in [0;36mfit_xgboost_classifier[0;34m(X_train, y_train, classifier_name)[0m
+[1;32m     51[0m [38;5;66;03m# hyperparameter_grid =  {[39;00m
+[1;32m     52[0m [38;5;66;03m#         'n_estimators': [100, 200,300],[39;00m
+[1;32m     53[0m [38;5;66;03m#         'learning_rate': [0.01, 0.1, 0.3],[39;00m
+[0;32m   (...)[0m
+[1;32m     58[0m 
+[1;32m     59[0m [38;5;66;03m# IL 2024-04-12 - corrected this to what was actually run[39;00m
+[1;32m     60[0m hyperparameter_grid [38;5;241m=[39m  {
+[1;32m     61[0m         [38;5;124m'[39m[38;5;124mlearning_rate[39m[38;5;124m'[39m: [[38;5;241m0.01[39m, [38;5;241m0.1[39m, [38;5;241m0.3[39m],
+[1;32m     62[0m         [38;5;124m'[39m[38;5;124mn_estimators[39m[38;5;124m'[39m: [[38;5;241m100[39m, [38;5;241m200[39m],
+[0;32m   (...)[0m
+[1;32m     65[0m         [38;5;124m'[39m[38;5;124mcolsample_bytree[39m[38;5;124m'[39m: [[38;5;241m0.8[39m, [38;5;241m1[39m]
+[1;32m     66[0m }            
+[1;32m     68[0m param_grid [38;5;241m=[39m {
+[1;32m     69[0m     [38;5;124m'[39m[38;5;124mn_estimators[39m[38;5;124m'[39m: hyperparameter_grid[[38;5;124m'[39m[38;5;124mn_estimators[39m[38;5;124m'[39m],
+[1;32m     70[0m     [38;5;124m'[39m[38;5;124mlearning_rate[39m[38;5;124m'[39m: hyperparameter_grid[[38;5;124m'[39m[38;5;124mlearning_rate[39m[38;5;124m'[39m],
+[1;32m     71[0m     [38;5;124m'[39m[38;5;124mmax_depth[39m[38;5;124m'[39m: hyperparameter_grid[[38;5;124m'[39m[38;5;124mmax_depth[39m[38;5;124m'[39m],
+[0;32m---> 72[0m     [38;5;124m'[39m[38;5;124mmin_child_weight[39m[38;5;124m'[39m: [43mhyperparameter_grid[49m[43m[[49m[38;5;124;43m'[39;49m[38;5;124;43mmin_child_weight[39;49m[38;5;124;43m'[39;49m[43m][49m
+[1;32m     73[0m }
+[1;32m     75[0m start_time [38;5;241m=[39m time[38;5;241m.[39mtime()
+[1;32m     77[0m xgb_clf [38;5;241m=[39m XGBClassifier(use_label_encoder[38;5;241m=[39m[38;5;28;01mFalse[39;00m, eval_metric[38;5;241m=[39m[38;5;124m'[39m[38;5;124mlogloss[39m[38;5;124m'[39m)
+
+[0;31mKeyError[0m: 'min_child_weight'
+
+Completed Job
+Time elapsed: 0 minute(s).
