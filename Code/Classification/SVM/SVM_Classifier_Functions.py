@@ -50,10 +50,11 @@ def fit_svm_classifier(X_train, y_train, classifier_name):
         os.makedirs(output_dir)
 
     hyperparameter_grid = {
-        'c_values' :  [0.001, 0.01, 0.1, 1],
+        'c_values' :  [0.01, 0.1, 1, 10],
         'kernel_grid' :  ['rbf', 'poly'],
         'gamma_grid' :  [0.001, 0.01, 0.1, 1],
         'degree_grid':  [2, 4],
+        'class_weight': ['balanced', None],
         'k_folds' : 5
     }
     
@@ -62,7 +63,8 @@ def fit_svm_classifier(X_train, y_train, classifier_name):
         'C': hyperparameter_grid['c_values'],
         'kernel': hyperparameter_grid['kernel_grid'],
         'gamma': hyperparameter_grid['gamma_grid'],
-        'degree': hyperparameter_grid['degree_grid']
+        'degree': hyperparameter_grid['degree_grid'],
+        'class_weight': hyperparameter_grid['class_weight']
     }
 
     start_time = time.time()
