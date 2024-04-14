@@ -12,6 +12,8 @@ from tensorflow.keras.optimizers import Adam, RMSprop, SGD
 from tensorflow.keras.wrappers.scikit_learn import KerasClassifier
 from tensorflow.keras.models import load_model
 from sklearn.model_selection import GridSearchCV
+from sklearn.metrics import accuracy_score
+from sklearn.preprocessing import LabelEncoder, StandardScaler
 
 
 ##################################################################################################
