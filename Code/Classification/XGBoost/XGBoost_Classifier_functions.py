@@ -48,22 +48,13 @@ def fit_xgboost_classifier(X_train, y_train, classifier_name):
     if not os.path.exists(output_dir):
         os.makedirs(output_dir)
 
-    # hyperparameter_grid =  {
-    #         'n_estimators': [100, 200,300],
-    #         'learning_rate': [0.01, 0.1, 0.3],
-    #         'max_depth': [3, 5, 7],
-    #         'min_child_weight': [1,3,5],
-    #         'k_folds': 5,
-    #     }
-    
-    # IL 2024-04-12 - corrected this to what was actually run
     hyperparameter_grid =  {
+            'n_estimators': [100, 200,300],
             'learning_rate': [0.01, 0.1, 0.3],
-            'n_estimators': [100, 200],
-            'max_depth': [3, 6],
-            'subsample': [0.8, 1],
-            'colsample_bytree': [0.8, 1]
-    }            
+            'max_depth': [3, 5, 7],
+            'min_child_weight': [1,3,5],
+            'k_folds': 5,
+    }         
     
     param_grid = {
         'n_estimators': hyperparameter_grid['n_estimators'],
