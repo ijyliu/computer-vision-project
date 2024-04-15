@@ -830,9 +830,9 @@ JobID|JobName|Partition|State|Start|End|AllocNodes|AllocCPUS|NodeList
 460191|Fit_Random_Forest_Classifier_VGG|epurdom|COMPLETED|2024-04-14T16:44:11|2024-04-14T17:15:03|1|16|frodo
 460191.batch|batch||COMPLETED|2024-04-14T16:44:11|2024-04-14T17:15:03|1|16|frodo
 460191.extern|extern||COMPLETED|2024-04-14T16:44:11|2024-04-14T17:15:03|1|16|frodo
-460194|Fit_Logistic_Regression_Classifier_Top3_Features|epurdom|RUNNING|2024-04-14T17:25:53|Unknown|1|16|frodo
-460194.batch|batch||RUNNING|2024-04-14T17:25:53|Unknown|1|16|frodo
-460194.extern|extern||RUNNING|2024-04-14T17:25:53|Unknown|1|16|frodo
+460194|Fit_Logistic_Regression_Classifier_Top3_Features|epurdom|COMPLETED|2024-04-14T17:25:53|2024-04-14T20:20:36|1|16|frodo
+460194.batch|batch||COMPLETED|2024-04-14T17:25:53|2024-04-14T20:20:36|1|16|frodo
+460194.extern|extern||COMPLETED|2024-04-14T17:25:53|2024-04-14T20:20:36|1|16|frodo
 460195|Fit_Random_Forest_Classifier_Top3_Features|epurdom|COMPLETED|2024-04-14T17:26:15|2024-04-14T18:14:38|1|16|frodo
 460195.batch|batch||COMPLETED|2024-04-14T17:26:15|2024-04-14T18:14:38|1|16|frodo
 460195.extern|extern||COMPLETED|2024-04-14T17:26:15|2024-04-14T18:14:38|1|16|frodo
@@ -857,6 +857,6 @@ JobID|JobName|Partition|State|Start|End|AllocNodes|AllocCPUS|NodeList
 460206|Fit_Autogluon_Tabular_Only_SCF_Medium_Presets_Top3|jsteinhardt|COMPLETED|2024-04-14T19:09:45|2024-04-14T19:30:59|1|16|balrog
 460206.batch|batch||COMPLETED|2024-04-14T19:09:45|2024-04-14T19:30:59|1|16|balrog
 460206.extern|extern||COMPLETED|2024-04-14T19:09:45|2024-04-14T19:30:59|1|16|balrog
-460450|Evaluate_Autogluon_Tabular_Only_SCF_Medium_Presets_Top3|jsteinhardt|RUNNING|2024-04-14T20:02:09|Unknown|1|16|balrog
-460450.batch|batch||RUNNING|2024-04-14T20:02:09|Unknown|1|16|balrog
-460450.extern|extern||RUNNING|2024-04-14T20:02:09|Unknown|1|16|balrog
+460450|Evaluate_Autogluon_Tabular_Only_SCF_Medium_Presets_Top3|jsteinhardt|COMPLETED|2024-04-14T20:02:09|2024-04-14T21:04:25|1|16|balrog
+460450.batch|batch||COMPLETED|2024-04-14T20:02:09|2024-04-14T21:04:25|1|16|balrog
+460450.extern|extern||COMPLETED|2024-04-14T20:02:09|2024-04-14T21:04:25|1|16|balrog
