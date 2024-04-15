@@ -4,3 +4,6 @@ Starting Job
 0.00s - make the debugger miss breakpoints. Please pass -Xfrozen_modules=off
 0.00s - to python to disable frozen modules.
 0.00s - Note: Debugging will proceed. Set PYDEVD_DISABLE_FILE_VALIDATION=1 to disable this validation.
+[NbConvertApp] Writing 12480 bytes to Fit_SVM_Classifier_Top3_Features.ipynb
+Completed Job
+Time elapsed: 49 minute(s).
