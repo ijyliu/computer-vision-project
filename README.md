@@ -1,6 +1,8 @@
 # computer-vision-project
 
-Project Deadline: 15th April
+Project Presentation Due: 15th April, 2024
+
+Project Report Due: 19th April, 2024
 
 Isaac Liu, Mayank Sethi, Gaurav Sharan Srivastava, Ashutosh Tiwari
 
