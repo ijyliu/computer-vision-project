@@ -4,7 +4,7 @@
 ##################################################################################################
 
 # Whether this is a sample run or not
-sample_run = True
+sample_run = False
 
 # Packages
 from PIL import Image
@@ -19,6 +19,14 @@ import torch.optim as optim
 from torch.utils.data import Dataset, DataLoader
 import pandas as pd
 import time
+
+# GPU diagnostics
+print(torch.__version__)
+print(torch.version.cuda)
+print(torch.cuda.is_available())
+print(torch.cuda.device_count())
+print(torch.cuda.get_device_name(0))
+print(torch.cuda.current_device())
 
 # Set up device
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
@@ -158,7 +166,7 @@ criterion = nn.CrossEntropyLoss()
 optimizer = optim.SGD(model.parameters(), lr=0.001, momentum=0.9)
 
 # Define the number of epochs
-num_epochs = 10
+num_epochs = 25
 
 ##################################################################################################
 
