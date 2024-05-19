@@ -4,7 +4,7 @@
 ##################################################################################################
 
 # Whether this is a sample run or not
-sample_run = False
+sample_run = True
 
 # Packages
 from PIL import Image
@@ -22,7 +22,8 @@ import time
 
 # Set up device
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
-print('Device:', device)
+print('set up device')
+print('device: ', device)
 
 ##################################################################################################
 
