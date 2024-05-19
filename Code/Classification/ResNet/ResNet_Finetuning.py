@@ -164,6 +164,10 @@ num_epochs = 10
 
 # Training
 
+# Store best validation accuracy and model weights
+best_val_acc = 0.0
+best_model_weights = None
+
 # Train the model
 for epoch in range(num_epochs):
 
@@ -209,8 +213,7 @@ for epoch in range(num_epochs):
         for inputs, labels in val_data_loader:
 
             # Move the data to the device
-            inputs = inputs.to(device)
-            labels = labels.to(device)
+            inputs, labels = inputs.to(device), labels.to(device)
 
             # Forward
             outputs = model(inputs)
@@ -236,7 +239,15 @@ for epoch in range(num_epochs):
     # Print
     print(f"Epoch {epoch + 1} of {num_epochs} | Time Taken: {str(round(end_time - start_time, 2)) + 's'} | Train Loss: {train_loss:.4f} | Train Acc: {train_acc:.4f} | Val Loss: {val_loss:.4f} | Val Acc: {val_acc:.4f}")
 
+    # Save the model weights if the validation accuracy is better
+    if val_acc > best_val_acc:
+        best_val_acc = val_acc
+        best_model_weights = model.state_dict()
+
 ##################################################################################################
 
+# Print best validation accuracy
+print('Best Validation Accuracy:', best_val_acc)
+
 # Save model
-torch.save(model.state_dict(), '../../../Output/Classifier Fitting/ResNet/resnet.pth')
+torch.save(best_model_weights, '../../../Output/Classifier Fitting/ResNet/resnet.pth')
