@@ -8,8 +8,8 @@
 # Reset the SECONDS variable
 SECONDS=0
 
-# Execute the notebook
-jupyter nbconvert --to notebook --execute --inplace ResNet_Finetuning.ipynb
+# Run script
+python ResNet_Finetuning.py
 
 # Calculate time in minutes
 elapsed_minutes=$((SECONDS / 60))
