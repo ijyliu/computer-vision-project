@@ -8,7 +8,7 @@ Isaac Liu, Mayank Sethi, Gaurav Sharan Srivastava, Ashutosh Tiwari
 
 ### Website
 
-Try out the fine-tuned ResNet classifier [here](https://cv-web-app-3m4f2rmfzq-uc.a.run.app).
+Upload an image for the fine-tuned ResNet classifier [here](https://cv-web-app-3m4f2rmfzq-uc.a.run.app).
 
 ### Proposal Google Doc
 
