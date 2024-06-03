@@ -1,9 +1,9 @@
 # Base image
-FROM pytorch/pytorch:latest
+FROM anibali/pytorch:2.0.1-nocuda
 
 # Install dependencies
 COPY requirements.txt /tmp/
-RUN pip install --requirement /tmp/requirements.txt
+RUN pip install --no-cache-dir --requirement /tmp/requirements.txt
 
 # Copy the application code and files
 COPY . /app
