@@ -1,5 +1,5 @@
 # Base image
-FROM anibali/pytorch:2.0.1-nocuda
+FROM cnstark/pytorch:2.0.1-py3.10.11-ubuntu22.04
 
 # Install dependencies
 COPY requirements.txt /tmp/
