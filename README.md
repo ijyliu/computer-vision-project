@@ -6,6 +6,10 @@ Project Report Due: 19th April, 2024
 
 Isaac Liu, Mayank Sethi, Gaurav Sharan Srivastava, Ashutosh Tiwari
 
+### Website
+
+Try out the fine-tuned ResNet classifier [here](https://cv-web-app-3m4f2rmfzq-uc.a.run.app).
+
 ### Proposal Google Doc
 
 Doc [here](https://docs.google.com/document/d/1gqSdT-nfqlwkdRbOqXKUY_XXxJQ3LouqXd0_QTCT2Z0/edit).
