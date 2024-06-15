@@ -1,14 +1,20 @@
 # computer-vision-project
 
-Project Presentation Due: 15th April, 2024
-
-Project Report Due: 19th April, 2024
-
 Isaac Liu, Mayank Sethi, Gaurav Sharan Srivastava, Ashutosh Tiwari
 
-### Website
+## Web App
 
 Upload an image for the fine-tuned ResNet classifier [here](https://cv-web-app-3m4f2rmfzq-uc.a.run.app).
+
+## Report
+
+Doc [here](https://docs.google.com/document/d/1Hm4_qpn-m_Z5ploa43l7hY6AJFA5l4dOiKIlIt_PWf4/edit#heading=h.rqcihi4c7zuc).
+
+## Final Presentation
+
+Slides [here](https://docs.google.com/presentation/d/1_uGFRyL-al_7lUX1pT7Er69vDq8aFttjd4ZpQKmEFmc/edit?usp=sharing).
+
+## Project Resources
 
 ### Proposal Google Doc
 
@@ -17,10 +23,6 @@ Doc [here](https://docs.google.com/document/d/1gqSdT-nfqlwkdRbOqXKUY_XXxJQ3LouqX
 ### Weekly Updates Google Slides
 
 Slides [here](https://docs.google.com/presentation/d/1k3huPGVXQNyoEpoVzcwHZrJ3EdEE_T08D6G-Vn3P4EA/edit#slide=id.g2c00b2e32d3_0_247).
-
-### Final Report Google Doc
-
-Doc [here](https://docs.google.com/document/d/1Hm4_qpn-m_Z5ploa43l7hY6AJFA5l4dOiKIlIt_PWf4/edit#heading=h.rqcihi4c7zuc).
 
 ### Box
 
