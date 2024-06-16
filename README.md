@@ -8,7 +8,7 @@ In Phase 1, we preprocessed and resized >8,000 images (blurring with convolution
 
 In Phase 2, Isaac finetuned a mid-sized ResNet convolutional neural network on the data in PyTorch (>93% accuracy) and deployed a [web app](https://cv-web-app-3m4f2rmfzq-uc.a.run.app) with Flask, Docker, and Google Cloud - you can upload your own image.
 
-## Technologies
+## Technologies (not exhaustive!)
 
 - Python
   - Scikit-Image
