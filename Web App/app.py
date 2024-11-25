@@ -76,8 +76,13 @@ def get_image_prediction(img, model, processor):
 # Declare a flask app
 app = Flask(__name__)
 
-# Main page
-@app.route('/', methods=['GET'])
+# Render loading page
+@app.route('/')
+def home():
+    return render_template('loading.html')
+
+# Redirect to index
+@app.route('/main', methods=['GET'])
 def index():
     return render_template('index.html')
 
