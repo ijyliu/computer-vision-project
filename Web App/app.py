@@ -13,6 +13,7 @@ import re
 import base64
 from io import BytesIO
 from flask import Flask, request, render_template, jsonify
+from flask_cors import CORS
 from gevent.pywsgi import WSGIServer
 
 ##################################################################################################
@@ -75,6 +76,7 @@ def get_image_prediction(img, model, processor):
 
 # Declare a flask app
 app = Flask(__name__)
+CORS(app)
 
 # Main page
 @app.route('/', methods=['GET'])
